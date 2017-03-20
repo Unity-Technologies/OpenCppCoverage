@@ -32,9 +32,9 @@ namespace Exporter
 	namespace
 	{
 		//---------------------------------------------------------------------
-		std::wstring UpdateLineColor(const std::wstring& line, bool codeHasBeenExecuted)
+		std::string UpdateLineColor(const std::string& line, bool codeHasBeenExecuted)
 		{
-			std::wstring output;
+			std::string output;
 
 			if (codeHasBeenExecuted)
 				output += HtmlFileCoverageExporter::StyleBackgroundColorExecuted;
@@ -42,34 +42,33 @@ namespace Exporter
 				output += HtmlFileCoverageExporter::StyleBackgroundColorUnexecuted;
 
 			output += line;
-			output += L"</span>";
+			output += "</span>";
 
 			return output;
 		}
 
-		const std::wstring StyleBackgroundColor = L"<span style = \"background-color:#";
+		const std::string StyleBackgroundColor = "<span style = \"background-color:#";
 	}
 
-	const std::wstring HtmlFileCoverageExporter::StyleBackgroundColorExecuted = StyleBackgroundColor + L"dfd" + L"\">";
-	const std::wstring HtmlFileCoverageExporter::StyleBackgroundColorUnexecuted = StyleBackgroundColor + L"fdd" + L"\">";
+	const std::string HtmlFileCoverageExporter::StyleBackgroundColorExecuted = StyleBackgroundColor + "dfd" + "\">";
+	const std::string HtmlFileCoverageExporter::StyleBackgroundColorUnexecuted = StyleBackgroundColor + "fdd" + "\">";
 	
 	//-------------------------------------------------------------------------
-	bool HtmlFileCoverageExporter::Export(
-		const CppCoverage::FileCoverage& fileCoverage,
-		std::wostream& output) const
+	bool HtmlFileCoverageExporter::Export(const CppCoverage::FileCoverage& fileCoverage,
+                                          std::ostream& output) const
 	{
 		auto filePath = fileCoverage.GetPath();
 
 		if (!fs::exists(filePath))
 			return false;
 
-		std::wifstream ifs{filePath};
+		std::ifstream ifs(filePath.c_str(), std::ifstream::in);
 		if (!ifs)
-			throw std::runtime_error("Cannot open file : " + Tools::ToUtf8String(filePath));
+			throw std::runtime_error("Cannot open file : " + filePath);
 
-		std::wstring line;
+		std::string line;
 		for (int i = 1; std::getline(ifs, line); ++i)
-		{			
+		{
 			auto lineCoverage = fileCoverage[i];
 			
 			line = boost::spirit::classic::xml::encode(line);

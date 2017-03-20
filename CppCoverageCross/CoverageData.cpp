@@ -22,7 +22,7 @@
 namespace CppCoverage
 {
 	//-------------------------------------------------------------------------
-	CoverageData::CoverageData(const std::wstring& name, int exitCode)
+	CoverageData::CoverageData(const std::string& name, int exitCode)
 		: name_(name)
 		, exitCode_(exitCode)
 	{
@@ -52,7 +52,7 @@ namespace CppCoverage
 	}
 
 	//-------------------------------------------------------------------------
-	ModuleCoverage& CoverageData::AddModule(const std::wstring& path)
+	ModuleCoverage& CoverageData::AddModule(const std::string& path)
 	{
 		modules_.push_back(std::unique_ptr<ModuleCoverage>(new ModuleCoverage(path)));
 
@@ -60,7 +60,7 @@ namespace CppCoverage
 	}
 
 	//-------------------------------------------------------------------------	
-	void CoverageData::SetName(const std::wstring& name)
+	void CoverageData::SetName(const std::string& name)
 	{
 		name_ = name;
 	}
@@ -78,7 +78,7 @@ namespace CppCoverage
 	}
 	
 	//-------------------------------------------------------------------------	
-	const std::wstring& CoverageData::GetName() const
+	const std::string& CoverageData::GetName() const
 	{
 		return name_;
 	}

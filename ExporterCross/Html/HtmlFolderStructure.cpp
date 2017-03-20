@@ -80,7 +80,7 @@ namespace Exporter
 	}
 
 	//-------------------------------------------------------------------------
-	boost::filesystem::path HtmlFolderStructure::CreateCurrentRoot(const std::wstring& outputFolder)
+	boost::filesystem::path HtmlFolderStructure::CreateCurrentRoot(const std::string& outputFolder)
 	{
 		currentRoot_ = CreateUniqueDirectories(fs::absolute(fs::path(outputFolder)));
 		CopyRecursiveDirectoryContent(

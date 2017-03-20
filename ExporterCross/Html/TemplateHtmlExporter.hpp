@@ -58,7 +58,7 @@ namespace Exporter
         explicit TemplateHtmlExporter(const fs::path &templateFolder);
 
         std::unique_ptr<ctemplate::TemplateDictionary>
-        CreateTemplateDictionary(const std::wstring &title, const std::wstring &message) const;
+        CreateTemplateDictionary(const std::string &title, const std::string &message) const;
 
         void AddFileSectionToDictionary(
                 const std::string &originalFilename,
@@ -81,8 +81,8 @@ namespace Exporter
                 const fs::path &) const;
 
         void GenerateSourceTemplate(
-                const std::wstring &title,
-                const std::wstring &codeContent,
+                const std::string &title,
+                const std::string &codeContent,
                 const fs::path &output) const;
 
     private:

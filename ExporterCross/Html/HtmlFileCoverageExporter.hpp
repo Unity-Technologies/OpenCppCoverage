@@ -37,15 +37,15 @@ namespace Exporter
 	class HtmlFileCoverageExporter
 	{
 	public:
-		static const std::wstring StyleBackgroundColorExecuted;
-		static const std::wstring StyleBackgroundColorUnexecuted;
+		static const std::string StyleBackgroundColorExecuted;
+		static const std::string StyleBackgroundColorUnexecuted;
 
 	public:
 		HtmlFileCoverageExporter() = default;
 
 		bool Export(
 			const CppCoverage::FileCoverage&,
-			std::wostream& output) const;
+			std::ostream& output) const;
 		
 	private:
 		HtmlFileCoverageExporter(const HtmlFileCoverageExporter&) = delete;

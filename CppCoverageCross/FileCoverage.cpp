@@ -27,7 +27,7 @@
 namespace CppCoverage
 {
     //-------------------------------------------------------------------------
-    FileCoverage::FileCoverage(const std::wstring& path)
+    FileCoverage::FileCoverage(const std::string& path)
             : path_(path)
     {
     }
@@ -46,15 +46,15 @@ namespace CppCoverage
     }
 
     //-------------------------------------------------------------------------
-    bool FileCoverage::AddLine(const std::wstring line)
+    bool FileCoverage::AddLine(const std::string line)
     {
-        if (strncmp(Tools::ToUtf8String(line).c_str(), "e", 1) == 0)
+        if (strncmp(line.c_str(), "e", 1) == 0)
         {
             return false;
         }
         else
         {
-            std::string tokenLine = Tools::ToUtf8String(line.substr(3, line.length() - 1));
+            std::string tokenLine = line.substr(3, line.length() - 1);
             unsigned int lineNumber = GetToken(tokenLine);
             updateLineNumber(lineNumber);
             bool hasBeenExecuted = GetToken(tokenLine) >= 1;
@@ -74,15 +74,15 @@ namespace CppCoverage
     void FileCoverage::UpdateLine(unsigned int lineNumber, bool hasBeenExecuted)
     {
         if (!lines_.erase(lineNumber))
-            throw std::runtime_error(Tools::ToUtf8String(L"Line " + std::to_wstring(lineNumber)
-                                     + L" does not exists and cannot be updated for " + path_));
+            throw std::runtime_error("Line " + std::to_string(lineNumber)
+                                     + " does not exists and cannot be updated for " + path_);
 
         LineCoverage lineCov{lineNumber, hasBeenExecuted};
         lines_.emplace(lineNumber, lineCov);
     }
 
     //-------------------------------------------------------------------------
-    const std::wstring &FileCoverage::GetPath() const
+    const std::string &FileCoverage::GetPath() const
     {
         return path_;
     }

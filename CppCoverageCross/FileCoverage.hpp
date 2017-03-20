@@ -26,13 +26,13 @@ namespace CppCoverage
     class FileCoverage
     {
     public:
-        explicit FileCoverage(const std::wstring &path);
+        explicit FileCoverage(const std::string &path);
 
-        bool AddLine(const std::wstring line);
+        bool AddLine(const std::string line);
 
         void UpdateLine(unsigned int lineNumber, bool hasBeenExecuted);
 
-        const std::wstring &GetPath() const;
+        const std::string &GetPath() const;
 
         const LineCoverage *operator[](unsigned int line) const;
 
@@ -46,7 +46,7 @@ namespace CppCoverage
         //FileCoverage(const FileCoverage &) = delete;
 
     private:
-        std::wstring path_;
+        std::string path_;
         std::map<unsigned int, LineCoverage> lines_;
         unsigned int lastLine_;
 

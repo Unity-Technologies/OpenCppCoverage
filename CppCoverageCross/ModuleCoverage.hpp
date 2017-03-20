@@ -29,13 +29,13 @@ namespace CppCoverage
         typedef std::vector<std::unique_ptr<FileCoverage>> T_FileCoverageCollection;
 
     public:
-        explicit ModuleCoverage(const std::wstring &path);
+        explicit ModuleCoverage(const std::string &path);
 
         ~ModuleCoverage();
 
-        FileCoverage &AddFile(const std::wstring &filename);
+        FileCoverage &AddFile(const std::string &filename);
 
-        const std::wstring &GetPath() const;
+        const std::string &GetPath() const;
 
         const T_FileCoverageCollection &GetFiles() const;
 
@@ -46,7 +46,7 @@ namespace CppCoverage
 
     private:
         T_FileCoverageCollection files_;
-        std::wstring path_;
+        std::string path_;
     };
 }
 

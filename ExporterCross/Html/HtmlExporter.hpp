@@ -44,14 +44,14 @@ namespace Exporter
 	class HtmlExporter
 	{
 	public:
-		static const std::wstring WarningExitCodeMessage;
+		static const std::string WarningExitCodeMessage;
 
 	public:
-		explicit HtmlExporter(const std::wstring& templateFolder);
+		explicit HtmlExporter(const std::string& templateFolder);
 
-        boost::filesystem::path GetDefaultPath(const std::wstring &) const;
+        boost::filesystem::path GetDefaultPath(const std::string &) const;
 
-		void Export(const CppCoverage::CoverageData&, const std::wstring& outputFolder) const;
+		void Export(const CppCoverage::CoverageData&, const std::string& outputFolder) const;
 
 	private:
 		HtmlExporter(const HtmlExporter&) = delete;
@@ -70,7 +70,7 @@ namespace Exporter
 	private:
 		TemplateHtmlExporter exporter_;
 		HtmlFileCoverageExporter fileCoverageExporter_;
-		std::wstring templateFolder_;
+		std::string templateFolder_;
 	};
 }
 

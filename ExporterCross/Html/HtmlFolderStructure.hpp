@@ -32,7 +32,7 @@ namespace Exporter
 	public:
 		HtmlFolderStructure(const boost::filesystem::path& templateFolder);
 
-		boost::filesystem::path CreateCurrentRoot(const std::wstring& outputFolder);
+		boost::filesystem::path CreateCurrentRoot(const std::string& outputFolder);
 		HtmlFile CreateCurrentModule(const boost::filesystem::path&);
 		HtmlFile GetHtmlFilePath(const boost::filesystem::path& filePath) const;
 

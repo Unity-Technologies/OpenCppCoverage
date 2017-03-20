@@ -23,7 +23,7 @@
 namespace CppCoverage
 {
 	//-------------------------------------------------------------------------
-	ModuleCoverage::ModuleCoverage(const std::wstring& path)
+	ModuleCoverage::ModuleCoverage(const std::string& path)
 		: path_(path)
 	{
 	}
@@ -34,7 +34,7 @@ namespace CppCoverage
 	}
 
 	//-------------------------------------------------------------------------
-	FileCoverage& ModuleCoverage::AddFile(const std::wstring& filePath)
+	FileCoverage& ModuleCoverage::AddFile(const std::string& filePath)
 	{
 		files_.push_back(std::unique_ptr<FileCoverage>(new FileCoverage(filePath)));
 
@@ -42,7 +42,7 @@ namespace CppCoverage
 	}
 
 	//-------------------------------------------------------------------------
-	const std::wstring& ModuleCoverage::GetPath() const
+	const std::string& ModuleCoverage::GetPath() const
 	{
 		return path_;
 	}

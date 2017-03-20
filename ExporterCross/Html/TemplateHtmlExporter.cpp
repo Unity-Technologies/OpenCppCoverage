@@ -193,16 +193,16 @@ namespace Exporter
     //-------------------------------------------------------------------------
     std::unique_ptr<ctemplate::TemplateDictionary>
     TemplateHtmlExporter::CreateTemplateDictionary(
-            const std::wstring &title,
-            const std::wstring &message) const
+            const std::string &title,
+            const std::string &message) const
     {
-        std::string titleStr{ToStr(title)};
+        std::string titleStr{title};
         std::unique_ptr<ctemplate::TemplateDictionary> dictionary;
 
         dictionary.reset(new ctemplate::TemplateDictionary(titleStr));
 
         dictionary->SetValue(TitleTemplate, titleStr);
-        dictionary->SetValue(messageTemplate, ToStr(message));
+        dictionary->SetValue(messageTemplate, message);
 
         return dictionary;
     }
@@ -254,15 +254,14 @@ namespace Exporter
 
     //-------------------------------------------------------------------------
     void TemplateHtmlExporter::GenerateSourceTemplate(
-            const std::wstring &title,
-            const std::wstring &codeContent,
+            const std::string &title,
+            const std::string &codeContent,
             const fs::path &output) const
     {
-        auto titleStr = Tools::ToUtf8String(title);
-        ctemplate::TemplateDictionary dictionary(titleStr);
+        ctemplate::TemplateDictionary dictionary(title);
 
-        dictionary.SetValue(TitleTemplate, titleStr);
-        dictionary.SetValue(codeTemplate, Tools::ToUtf8String(codeContent));
+        dictionary.SetValue(TitleTemplate, title);
+        dictionary.SetValue(codeTemplate, codeContent);
         WriteTemplate(dictionary, fileTemplatePath_, output);
     }
 }

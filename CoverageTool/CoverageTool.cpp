@@ -17,13 +17,13 @@
 void
 ParseToken(const std::string &token, char **&argv, std::string &inputFile, std::string &outputPath);
 
-CppCoverage::CoverageData parseFile(std::string path, std::wstring programName)
+CppCoverage::CoverageData parseFile(std::string path, std::string programName)
 {
-    CppCoverage::CoverageData data{L"Results", 0};
+    CppCoverage::CoverageData data{"Results", 0};
 
-    std::wifstream infile(path);
+    std::ifstream infile(path);
     CppCoverage::ModuleCoverage &module = data.AddModule(programName);
-    std::wstring line;
+    std::string line;
     std::getline(infile, line);
     CppCoverage::FileCoverage *file = &module.AddFile(line.substr(3, line.length() - 1));
     while (std::getline(infile, line))
@@ -49,7 +49,7 @@ PrintFile(const CppCoverage::FileCoverage &file,
         std::cout << "empty file" << std::endl;
     }
     CppCoverage::CoverageRate rate = computer.GetCoverageRate(file);
-    std::wcout << file.GetPath() << " . " << rate.GetExecutedLinesCount() << std::endl;
+    std::cout << file.GetPath() << " . " << rate.GetExecutedLinesCount() << std::endl;
     std::vector<CppCoverage::LineCoverage> lines = file.GetLines();
     for (unsigned int i = 0; i <= lines.size(); i++)
     {
@@ -71,7 +71,7 @@ PrintModule(const CppCoverage::ModuleCoverage &module,
             const CppCoverage::CoverageRateComputer &computer)
 {
     CppCoverage::CoverageRate rate = computer.GetCoverageRate(module);
-    std::wcout << module.GetPath() << " . " << rate.GetPercentRate() << std::endl;
+    std::cout << module.GetPath() << " . " << rate.GetPercentRate() << std::endl;
     for (const auto &file : module.GetFiles())
     {
         PrintFile(*file, computer);
@@ -79,7 +79,7 @@ PrintModule(const CppCoverage::ModuleCoverage &module,
 }
 
 void
-CreateCoverageOutput(CppCoverage::CoverageData data, std::wstring outputPath)
+CreateCoverageOutput(CppCoverage::CoverageData data, std::string outputPath)
 {
     CppCoverage::CoverageRateComputer computer(data);
 
@@ -90,7 +90,7 @@ CreateCoverageOutput(CppCoverage::CoverageData data, std::wstring outputPath)
         PrintModule(*module, computer);
     }
 
-    Exporter::HtmlExporter exporter(L"../Exporter/Html/Template");
+    Exporter::HtmlExporter exporter("../Exporter/Html/Template");
     exporter.Export(data, outputPath);
 }
 
@@ -132,7 +132,7 @@ int main(int argc, char *argv[])
     }
     else
     {
-        CreateCoverageOutput(parseFile(inputFile, L"Result"), Tools::Utf8ToWString(outputPath));
+        CreateCoverageOutput(parseFile(inputFile, "Result"), outputPath);
     }
 
     return 0;

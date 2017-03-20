@@ -50,20 +50,20 @@ namespace Exporter
         }
 
         //-------------------------------------------------------------------------
-        std::wstring GetMainMessage(const CppCoverage::CoverageData &coverageData)
+        std::string GetMainMessage(const CppCoverage::CoverageData &coverageData)
         {
             auto exitCode = coverageData.GetExitCode();
 
             if (exitCode)
-                return HtmlExporter::WarningExitCodeMessage + std::to_wstring(exitCode);
-            return L"";
+                return HtmlExporter::WarningExitCodeMessage + std::to_string(exitCode);
+            return "";
         }
 
-        std::wstring filename(const std::wstring& file_path)
+        std::string filename(const std::string& file_path)
         {
-            std::wstring file_name;
+            std::string file_name;
 
-            std::wstring::const_reverse_iterator it = std::find(file_path.rbegin(), file_path.rend(), '\\');
+            std::string::const_reverse_iterator it = std::find(file_path.rbegin(), file_path.rend(), '\\');
             if (it != file_path.rend())
             {
                 file_name.assign(file_path.rbegin(), it);
@@ -74,16 +74,16 @@ namespace Exporter
     }
 
     //-------------------------------------------------------------------------
-    const std::wstring HtmlExporter::WarningExitCodeMessage = L"Warning: Your program has exited with error code: ";
+    const std::string HtmlExporter::WarningExitCodeMessage = "Warning: Your program has exited with error code: ";
 
     //-------------------------------------------------------------------------
-    HtmlExporter::HtmlExporter(const std::wstring &templateFolder)
+    HtmlExporter::HtmlExporter(const std::string &templateFolder)
             : exporter_(templateFolder), fileCoverageExporter_(), templateFolder_(templateFolder)
     {
     }
 
     //-------------------------------------------------------------------------
-    boost::filesystem::path HtmlExporter::GetDefaultPath(const std::wstring&) const
+    boost::filesystem::path HtmlExporter::GetDefaultPath(const std::string&) const
     {
         auto now = std::time(nullptr);
         auto localNow = std::localtime(&now);
@@ -97,7 +97,7 @@ namespace Exporter
     //-------------------------------------------------------------------------
     void HtmlExporter::Export(
             const CppCoverage::CoverageData &coverageData,
-            const std::wstring &outputFolderPrefix) const
+            const std::string &outputFolderPrefix) const
     {
         HtmlFolderStructure htmlFolderStructure{templateFolder_};
         CppCoverage::CoverageRateComputer coverageRateComputer{coverageData};
@@ -115,9 +115,9 @@ namespace Exporter
             if (moduleCoverageRate.GetTotalLinesCount())
             {
                 const auto &modulePath = module->GetPath();
-                std::wstring moduleFilename = filename(module->GetPath());
+                std::string moduleFilename = filename(module->GetPath());
                 auto moduleTemplateDictionary = exporter_.CreateTemplateDictionary(
-                        moduleFilename, L"");
+                        moduleFilename, "");
 
                 auto htmlModulePath = htmlFolderStructure.CreateCurrentModule(modulePath);
                 ExportFiles(coverageRateComputer, *module, htmlFolderStructure,
@@ -125,8 +125,7 @@ namespace Exporter
 
                 exporter_.GenerateModuleTemplate(*moduleTemplateDictionary,
                                                  htmlModulePath.GetAbsolutePath());
-                exporter_.AddModuleSectionToDictionary(Tools::ToUtf8String(module->GetPath()),
-                                                       moduleCoverageRate,
+                exporter_.AddModuleSectionToDictionary(module->GetPath(), moduleCoverageRate,
                                                        htmlModulePath.GetRelativeLinkPath(),
                                                        *projectDictionary);
             }
@@ -147,7 +146,7 @@ namespace Exporter
         {
             const auto &fileCoverageRate = coverageRateComputer.GetCoverageRate(*file);
             boost::optional<fs::path> generatedOutput = ExportFile(htmlFolderStructure, *file);
-            exporter_.AddFileSectionToDictionary(Tools::ToUtf8String(file->GetPath()), fileCoverageRate,
+            exporter_.AddFileSectionToDictionary(file->GetPath(), fileCoverageRate,
                                                  generatedOutput.get_ptr(),
                                                  moduleTemplateDictionary);
         }
@@ -159,7 +158,7 @@ namespace Exporter
             const cov::FileCoverage &fileCoverage) const
     {
         auto htmlFilePath = htmlFolderStructure.GetHtmlFilePath(fileCoverage.GetPath());
-        std::wostringstream ostr;
+        std::ostringstream ostr;
 
         if (!fileCoverageExporter_.Export(fileCoverage, ostr))
             return boost::optional<fs::path>();
