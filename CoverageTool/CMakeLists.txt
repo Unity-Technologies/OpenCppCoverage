@@ -23,13 +23,13 @@ endif()
 include_directories(
         C:/Users/nicklas/Downloads/boost_1_63_0
         C:/Users/nicklas/Downloads/boost_1_63_0/boost/tr1/tr1
-        ${PROJECT_SOURCE_DIR})
+        ${PROJECT_SOURCE_DIR}
+        ${CMAKE_SOURCE_DIR}/ctemplate)
 
-link_libraries(ExporterCross CppCoverageCross
+link_libraries(ExporterCross CppCoverageCross ctemplate
         "/usr/lib/libboost_system.dll.a"
         "/usr/lib/libboost_filesystem.dll.a"
         "/usr/lib/libboost_log.dll.a"
-        "/usr/lib/libboost_log_setup.dll.a"
-        "/usr/lib/libctemplate.dll.a")
+        "/usr/lib/libboost_log_setup.dll.a")
 
 add_executable(CovTool CoverageTool.cpp)
