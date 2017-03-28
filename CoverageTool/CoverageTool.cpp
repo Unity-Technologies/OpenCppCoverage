@@ -5,77 +5,99 @@
 #include <iomanip>
 #include <sstream>
 #include <fstream>
+#include <regex>
 
-#include <CppCoverageCross/FileCoverage.hpp>
-#include <CppCoverageCross/ModuleCoverage.hpp>
-#include <CppCoverageCross/CoverageData.hpp>
-#include <ExporterCross/Html/HtmlExporter.hpp>
-#include <ToolsCross/Tool.hpp>
+#include <boost/optional.hpp>
+
+#include <CppCoverage/FileCoverage.hpp>
+#include <CppCoverage/ModuleCoverage.hpp>
+#include <CppCoverage/CoverageData.hpp>
+#include <CppCoverage/CoverageRateComputer.hpp>
+#include <Exporter/Html/HtmlExporter.hpp>
 
 #pragma warning(disable:4996)
 
 void
-ParseToken(const std::string &token, char **&argv, std::string &inputFile, std::string &outputPath);
+ParseToken(const std::string &token, char **&argv, std::string &inputFile, std::string &outputPath,
+           std::regex& src_filter);
 
-CppCoverage::CoverageData parseFile(std::string path, std::string programName)
+//    Notice the side effect on the string.
+//    This is necessary unless we return the new string after the erase.
+//    Doing this will introduce a struct I feel not necessary.
+//    We delete the characters up to and including the delimiter.
+unsigned int
+GetToken(std::string& line)
 {
-    CppCoverage::CoverageData data{"Results", 0};
+    std::string delimiter = ",";
+    size_t pos = line.find(delimiter);
+    unsigned long token = stoul(line.substr(0, pos));
+    line.erase(0, pos + delimiter.length());
+    return (unsigned int) token;
+}
+
+void
+skip_file(std::ifstream& ifstream)
+{
+    std::string line;
+    for (std::getline(ifstream, line); strcmp(line.c_str(), "end_of_record") != 0;
+         std::getline(ifstream, line)){}
+}
+
+std::string
+GetMatchingFileName(std::ifstream& infile, std::regex srcFilter)
+{
+    std::string line;
+    std::getline(infile, line);
+    if (line.empty())
+    {
+        return line;
+    }
+    std::string fileName = line.substr(3, line.length() - 1);
+    while (!std::regex_match(fileName, srcFilter))
+    {
+        skip_file(infile);
+        if (!std::getline(infile, line))
+        {
+            std::cerr << "End of file";
+            return std::string();
+        }
+        fileName = line.substr(3, line.length() - 1);
+    }
+    return fileName;
+}
+
+CppCoverage::CoverageData
+parseFile(std::string path, std::string programName, std::regex srcFilter)
+{
+    CppCoverage::CoverageData data{L"Results", 0};
 
     std::ifstream infile(path);
     CppCoverage::ModuleCoverage &module = data.AddModule(programName);
+
+    std::string fileName = GetMatchingFileName(infile, srcFilter);
+    //std::cout << fileName << std::endl;
+    CppCoverage::FileCoverage *file = &module.AddFile(fileName);
+
     std::string line;
-    std::getline(infile, line);
-    CppCoverage::FileCoverage *file = &module.AddFile(line.substr(3, line.length() - 1));
     while (std::getline(infile, line))
     {
-        if (!file->AddLine(line))
+        if (strncmp(line.c_str(), "e", 1) == 0)
         {
-            if (!std::getline(infile, line))
-            {
+            if ((fileName = GetMatchingFileName(infile, srcFilter)).empty()) {
                 break;
             }
-            file = &module.AddFile(line.substr(3, line.length() - 1));
+            //std::cout << fileName << std::endl;
+            file = &module.AddFile(fileName);
+        }
+        else
+        {
+            std::string tokenLine = line.substr(3, line.length() - 1);
+            unsigned int lineNumber = GetToken(tokenLine);
+            bool hasBeenExecuted = GetToken(tokenLine) > 0;
+            file->AddLine(lineNumber, hasBeenExecuted);
         }
     }
     return data;
-}
-
-void
-PrintFile(const CppCoverage::FileCoverage &file,
-          const CppCoverage::CoverageRateComputer &computer)
-{
-    if (file.GetLines().empty())
-    {
-        std::cout << "empty file" << std::endl;
-    }
-    CppCoverage::CoverageRate rate = computer.GetCoverageRate(file);
-    std::cout << file.GetPath() << " . " << rate.GetExecutedLinesCount() << std::endl;
-    std::vector<CppCoverage::LineCoverage> lines = file.GetLines();
-    for (unsigned int i = 0; i <= lines.size(); i++)
-    {
-        try
-        {
-            // at() instead of [] operator as we don't want to create garbage entries
-            CppCoverage::LineCoverage line = lines.at(i);
-            std::cout << line.GetLineNumber() << " : " << line.HasBeenExecuted() << std::endl;
-        }
-        catch (std::out_of_range oof)
-        {
-            // Skip empty entries and move on.
-        }
-    }
-}
-
-void
-PrintModule(const CppCoverage::ModuleCoverage &module,
-            const CppCoverage::CoverageRateComputer &computer)
-{
-    CppCoverage::CoverageRate rate = computer.GetCoverageRate(module);
-    std::cout << module.GetPath() << " . " << rate.GetPercentRate() << std::endl;
-    for (const auto &file : module.GetFiles())
-    {
-        PrintFile(*file, computer);
-    }
 }
 
 void
@@ -84,17 +106,18 @@ CreateCoverageOutput(CppCoverage::CoverageData data, std::string outputPath)
     CppCoverage::CoverageRateComputer computer(data);
 
     CppCoverage::CoverageRate rate = computer.GetCoverageRate();
-    std::cout << rate.GetPercentRate() << "," << rate.GetTotalLinesCount() << std::endl;
-    for (const auto &module : data.GetModules())
-    {
-        PrintModule(*module, computer);
-    }
+    //std::cout << rate.GetPercentRate() << "," << rate.GetTotalLinesCount() << std::endl;
+    //for (const auto &module : data.GetModules())
+    //{
+        //PrintModule(*module, computer);
+    //}
 
     Exporter::HtmlExporter exporter("../Exporter/Html/Template");
     exporter.Export(data, outputPath);
 }
 
-std::string AssignDefaultPath()
+std::string
+AssignDefaultPath()
 {
     auto now = std::time(nullptr);
     auto localNow = std::localtime(&now);
@@ -105,13 +128,22 @@ std::string AssignDefaultPath()
     return ostr.str();
 }
 
-int main(int argc, char *argv[])
+int
+main(int argc, char *argv[])
 {
     std::string inputFile, outputPath, diffPath;
+    std::regex src_filter;
+    try {
+        src_filter = std::regex("[\\w:\\\\]+.(cpp|c|h|hpp)");
+    }
+    catch (const std::regex_error& e) {
+        std::cout << "error" << e.what() << std::endl;
+    }
+
     for (++argv; *argv; ++argv)
     {
         std::string token = *argv;
-        ParseToken(token, argv, inputFile, outputPath);
+        ParseToken(token, argv, inputFile, outputPath, src_filter);
     }
 
     if (inputFile.empty())
@@ -122,7 +154,7 @@ int main(int argc, char *argv[])
 
     if (outputPath.empty())
     {
-        outputPath = "./" + AssignDefaultPath();
+        outputPath = AssignDefaultPath();
     }
 
     if (!diffPath.empty())
@@ -132,14 +164,15 @@ int main(int argc, char *argv[])
     }
     else
     {
-        CreateCoverageOutput(parseFile(inputFile, "Result"), outputPath);
+        CreateCoverageOutput(parseFile(inputFile, "Result", src_filter), outputPath);
     }
 
     return 0;
 }
 
 void
-ParseToken(const std::string &token, char **&argv, std::string &inputFile, std::string &outputPath)
+ParseToken(const std::string& token, char**& argv, std::string& inputFile, std::string& outputPath,
+           std::regex& src_filter)
 {
     if (token.empty())
     {
@@ -149,6 +182,11 @@ ParseToken(const std::string &token, char **&argv, std::string &inputFile, std::
     {
         ++argv;
         inputFile = *argv;
+    }
+    else if (token.compare("--srcFilter") == 0)
+    {
+        ++argv;
+        src_filter = std::regex(*argv);
     }
     else if (token.compare("--output") == 0)
     {
