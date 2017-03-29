@@ -19,9 +19,9 @@
 
 #include <boost/make_shared.hpp>
 
-#include "Tools/Tool.hpp"
+#include <CppCoverageCross/CppCoverageException.hpp>
+#include <ToolsCross/Tool.hpp>
 
-#include "CppCoverageException.hpp"
 #include "OptionsParser.hpp"
 
 namespace po = boost::program_options;

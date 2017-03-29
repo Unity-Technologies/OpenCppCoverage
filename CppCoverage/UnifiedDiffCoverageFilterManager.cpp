@@ -23,8 +23,8 @@
 #include "FileFilter/FileInfo.hpp"
 #include "FileFilter/LineInfo.hpp"
 
-#include "Tools/Tool.hpp"
-#include "Tools/Log.hpp"
+#include <ToolsCross/Tool.hpp>
+#include <ToolsCross/Log.hpp>
 
 namespace CppCoverage
 {

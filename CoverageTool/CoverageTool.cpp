@@ -9,10 +9,10 @@
 
 #include <boost/optional.hpp>
 
-#include <CppCoverage/FileCoverage.hpp>
-#include <CppCoverage/ModuleCoverage.hpp>
-#include <CppCoverage/CoverageData.hpp>
-#include <CppCoverage/CoverageRateComputer.hpp>
+#include <CppCoverageCross/FileCoverage.hpp>
+#include <CppCoverageCross/ModuleCoverage.hpp>
+#include <CppCoverageCross/CoverageData.hpp>
+#include <CppCoverageCross/CoverageRateComputer.hpp>
 #include <Exporter/Html/HtmlExporter.hpp>
 
 #pragma warning(disable:4996)

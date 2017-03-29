@@ -23,7 +23,7 @@
 #include <set>
 #include <boost/optional.hpp>
 
-#include "CoverageData.hpp"
+#include <CppCoverageCross/CoverageData.hpp>
 #include "CppCoverageExport.hpp"
 
 namespace CppCoverage

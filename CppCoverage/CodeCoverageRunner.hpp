@@ -19,7 +19,8 @@
 #include <memory>
 #include <unordered_map>
 
-#include "CoverageData.hpp"
+#include <CppCoverageCross/CoverageData.hpp>
+
 #include "IDebugEventsHandler.hpp"
 #include "IDebugInformationEventHandler.hpp"
 #include "CppCoverageExport.hpp"

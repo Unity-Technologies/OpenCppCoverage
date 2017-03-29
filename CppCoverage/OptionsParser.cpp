@@ -22,13 +22,13 @@
 #include <sstream>
 #include <boost/filesystem.hpp>
 
-#include "Tools/Tool.hpp"
-#include "CppCoverage/Patterns.hpp"
+#include <CppCoverageCross/CppCoverageException.hpp>
+#include <ToolsCross/Tool.hpp>
 
 #include "Options.hpp"
-#include "CppCoverageException.hpp"
-#include "ProgramOptions.hpp"
 #include "OptionsExport.hpp"
+#include "Patterns.hpp"
+#include "ProgramOptions.hpp"
 
 namespace po = boost::program_options;
 namespace cov = CppCoverage;
@@ -37,7 +37,7 @@ namespace fs = boost::filesystem;
 namespace CppCoverage
 {
 	namespace
-	{		
+	{
 		//---------------------------------------------------------------------
 		template<typename T>
 		const T* GetOptionalValue(

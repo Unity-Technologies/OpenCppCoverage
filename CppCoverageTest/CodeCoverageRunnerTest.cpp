@@ -36,8 +36,8 @@
 #include "CppCoverage/UnifiedDiffSettings.hpp"
 #include "CppCoverage/RunCoverageSettings.hpp"
 
-#include "Tools/Log.hpp"
-#include "Tools/Tool.hpp"
+#include "ToolsCross/Log.hpp"
+#include "ToolsCross/Tool.hpp"
 
 #include "TestHelper/CoverageDataComparer.hpp"
 #include "TestHelper/Tools.hpp"
@@ -46,7 +46,7 @@
 #include "TestCoverageConsole/TestBasic.hpp"
 #include "TestCoverageConsole/TestThread.hpp"
 #include "TestCoverageConsole/SpecialLineInfo.hpp"
-#include "TestCoverageConsole/FileWithSpecialCharéàè.hpp"
+#include "TestCoverageConsole/FileWithSpecialCharï¿½ï¿½ï¿½.hpp"
 #include "TestCoverageConsole/TestDiff.hpp"
 
 #include "TestCoverageSharedLib/TestCoverageSharedLib.hpp"

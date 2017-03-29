@@ -14,7 +14,7 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-#pragma once 
+#pragma once
 
 #pragma warning(push)
 
@@ -23,7 +23,7 @@
 #pragma warning(disable: 4273) // inconsistent dll linkage
 #pragma warning(disable: 4267) // 'initializing' : conversion from 'size_t' to 'int'
 
-template std::vector<std::string>; // To avoid error C4251
+//template std::vector<std::string>; // To avoid error C4251
 #define _SILENCE_STDEXT_HASH_DEPRECATION_WARNINGS
 #define __MINGW64__ // disable snprintf
 #include <ctemplate/template.h>

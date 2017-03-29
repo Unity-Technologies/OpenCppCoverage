@@ -21,10 +21,10 @@
 #include <boost/optional/optional.hpp>
 
 #include "Tools/DbgHelp.hpp"
-#include "Tools/Tool.hpp"
-#include "Tools/Log.hpp"
+#include <ToolsCross/Tool.hpp>
+#include <ToolsCross/Log.hpp>
 
-#include "CppCoverageException.hpp"
+#include <CppCoverageCross/CppCoverageException.hpp>
 #include "IDebugInformationEventHandler.hpp"
 #include "ICoverageFilterManager.hpp"
 #include "Address.hpp"

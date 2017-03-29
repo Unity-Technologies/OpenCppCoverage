@@ -17,7 +17,8 @@
 #include "stdafx.h"
 #include "BreakPoint.hpp"
 
-#include "CppCoverageException.hpp"
+#include <CppCoverageCross/CppCoverageException.hpp>
+
 #include "Address.hpp"
 
 namespace CppCoverage

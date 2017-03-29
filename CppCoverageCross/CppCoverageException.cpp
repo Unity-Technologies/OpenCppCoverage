@@ -14,33 +14,37 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-#include "stdafx.h"
-#include "ScopedAction.hpp"
+#include "CppCoverageException.hpp"
 
-#include <boost/optional/optional.hpp>
+#include <sstream>
+#include <vector>
 
-#include "Tool.hpp"
+#include <ToolsCross/Tool.hpp>
 
-#include "Log.hpp"
-
-namespace Tools
-{
+namespace CppCoverage
+{	
 	//-------------------------------------------------------------------------
-	ScopedAction::ScopedAction(std::function<void()> action)
-		: action_(action)
+	std::wstring GetErrorMessage(int lastErrorCode)
 	{
-	}
-
-	//-------------------------------------------------------------------------
-	ScopedAction::~ScopedAction()
-	{
-		auto error = Try([&]
+		std::vector<wchar_t> sysMsg(64 * 1024);
+		std::wostringstream ostr;
+#ifdef _WIN_32
+		if (FormatMessage(
+				FORMAT_MESSAGE_FROM_SYSTEM,
+				NULL, lastErrorCode,
+				MAKELANGID(LANG_NEUTRAL, SUBLANG_NEUTRAL),
+				&sysMsg[0], static_cast<int>(sysMsg.size()), NULL))
 		{
-			action_();
-		});
+			ostr << &sysMsg[0];
+		}
+		else
+		{
+			ostr << "Last error code:" << lastErrorCode;
+		}
+#elif __LINUX__
+        ostr << "Last error code:" << lastErrorCode;
+#endif
 
-		if (error)
-			LOG_ERROR << *error;
+		return ostr.str();
 	}
-
 }

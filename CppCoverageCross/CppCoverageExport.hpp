@@ -16,9 +16,14 @@
 
 #pragma once
 
-#include "Tools/ExceptionBase.hpp"
+//#ifdef CPPCOVERAGE_EXPORTS
+	//#define CPPCOVERAGE_DLL __declspec(dllexport)
+//#else
+	//#define CPPCOVERAGE_DLL _declspec(dllimport)
+#define CPPCOVERAGE_DLL
+//#endif
 
-GENERATE_EXCEPTION_CLASS(Tools, ToolsException);
+#pragma warning (disable: 4251)
 
-#define THROW(message) THROW_BASE(Tools, ToolsException, message)
+
 

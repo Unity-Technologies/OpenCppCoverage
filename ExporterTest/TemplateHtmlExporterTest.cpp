@@ -24,7 +24,7 @@
 
 #include "CppCoverage/CoverageData.hpp"
 #include "CppCoverage/CoverageRate.hpp"
-#include "Tools/Tool.hpp"
+#include "ToolsCross/Tool.hpp"
 
 #include "TestCoverageConsole/TestCoverageConsole.hpp"
 

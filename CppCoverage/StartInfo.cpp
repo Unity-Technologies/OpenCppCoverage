@@ -19,8 +19,8 @@
 
 #include <boost/filesystem.hpp>
 
-#include "Tools/Tool.hpp"
-#include "CppCoverageException.hpp"
+#include <CppCoverageCross/CppCoverageException.hpp>
+#include <ToolsCross/Tool.hpp>
 
 namespace fs = boost::filesystem;
 

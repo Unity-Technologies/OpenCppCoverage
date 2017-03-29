@@ -14,7 +14,6 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-#include "stdafx.h"
 #include "Log.hpp"
 
 #include <boost/log/expressions.hpp>
@@ -64,9 +63,9 @@ namespace Tools
 			);
 
 		// Set correct endocing for special char
-		auto loc = boost::locale::generator()("en_US.UTF-8");		
+		auto loc = boost::locale::generator()("en_US.UTF-8");
 		fileSink->imbue(loc);
-		consoleSink->imbue(loc);		
+		consoleSink->imbue(loc);
 	}
 
 	//-------------------------------------------------------------------------
@@ -84,7 +83,7 @@ namespace Tools
 	}
 
 	//-------------------------------------------------------------------------
-	void InitLoggerOstream(const boost::shared_ptr<std::ostringstream>& ostr)
+	/*void InitLoggerOstream(const boost::shared_ptr<std::ostringstream>& ostr)
 	{
 		typedef sinks::synchronous_sink<sinks::text_ostream_backend> text_sink;
 		auto sink = boost::make_shared<text_sink>();
@@ -93,5 +92,5 @@ namespace Tools
 		backend->add_stream(ostr);
 		backend->auto_flush(true);
 		SetLogSink(sink);
-	}	
+	}*/
 }

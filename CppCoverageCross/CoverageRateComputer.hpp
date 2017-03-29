@@ -18,6 +18,7 @@
 
 #include "CppCoverageExport.hpp"
 #include <unordered_map>
+#include <vector>
 #include "CoverageRate.hpp"
 
 namespace CppCoverage

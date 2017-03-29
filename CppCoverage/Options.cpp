@@ -16,7 +16,9 @@
 
 #include "stdafx.h"
 #include "Options.hpp"
-#include "CppCoverageException.hpp"
+
+#include <CppCoverageCross/CppCoverageException.hpp>
+
 #include "OptionsExport.hpp"
 
 namespace CppCoverage

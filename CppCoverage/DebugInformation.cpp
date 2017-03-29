@@ -21,12 +21,12 @@
 #include <boost/optional/optional.hpp>
 #include <boost/uuid/uuid_generators.hpp>
 
-#include "Tools/DbgHelp.hpp"
-#include "Tools/Tool.hpp"
-#include "Tools/Log.hpp"
-#include "Tools/ScopedAction.hpp"
+#include <CppCoverageCross/CppCoverageException.hpp>
+#include <ToolsCross/Tool.hpp>
+#include <ToolsCross/Log.hpp>
+#include <ToolsCross/ScopedAction.hpp>
 
-#include "CppCoverageException.hpp"
+#include "Tools/DbgHelp.hpp"
 #include "ICoverageFilterManager.hpp"
 
 #include "FileFilter/ModuleInfo.hpp"

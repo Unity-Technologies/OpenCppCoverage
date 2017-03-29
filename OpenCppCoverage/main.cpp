@@ -22,7 +22,7 @@
 #include <iostream>
 #include <boost/filesystem.hpp>
 
-#include "Tools/Tool.hpp"
+#include "ToolsCross/Tool.hpp"
 
 #include "OpenCppCoverage.hpp"
 

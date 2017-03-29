@@ -18,8 +18,8 @@
 #include "ExceptionHandler.hpp"
 #include "ProgramOptions.hpp"
 
-#include "Tools/ScopedAction.hpp"
-#include "Tools/Tool.hpp"
+#include <ToolsCross/ScopedAction.hpp>
+#include <ToolsCross/Tool.hpp>
 
 namespace CppCoverage
 {

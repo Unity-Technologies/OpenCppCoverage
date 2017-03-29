@@ -14,40 +14,26 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-#include "../stdafx.h"
-#include "BinaryExporter.hpp"
+#include "LineCoverage.hpp"
 
-#include <fstream>
-
-#include <boost/filesystem.hpp>
-
-#include "CoverageDataSerializer.hpp"
-#ifdef __linux__
-#include <ToolsCross/Tool.hpp>
-#elif _WIN_32
-#include <Tools/Tool.hpp>
-#endif
-
-namespace Exporter
+namespace CppCoverage
 {
 	//-------------------------------------------------------------------------
-	boost::filesystem::path BinaryExporter::GetDefaultPath(const std::wstring& prefix) const
+	LineCoverage::LineCoverage(unsigned int lineNumber, bool hasBeenExecuted)
+		: lineNumber_(lineNumber)
+		, hasBeenExecuted_(hasBeenExecuted)
 	{
-		boost::filesystem::path path{ prefix };
-
-		path += ".cov";
-
-		return path;
+	}
+		
+	//-------------------------------------------------------------------------
+	unsigned int LineCoverage::GetLineNumber() const
+	{
+		return lineNumber_;
 	}
 
 	//-------------------------------------------------------------------------
-	void BinaryExporter::Export(
-		const CppCoverage::CoverageData& coverageData, 
-		const boost::filesystem::path& output)
+	bool LineCoverage::HasBeenExecuted() const
 	{
-		CoverageDataSerializer coverageDataSerializer;
-
-		coverageDataSerializer.Serialize(coverageData, output);
-		Tools::ShowOutputMessage(L"Coverage binary generated in file: ", output);
+		return hasBeenExecuted_;
 	}
 }

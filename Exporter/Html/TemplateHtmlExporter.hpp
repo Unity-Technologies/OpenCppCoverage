@@ -101,10 +101,8 @@ namespace Exporter
 			const fs::path& originalFilename);
 
 	private:
-		fs::path mainTemplatePath_;		
+		fs::path mainTemplatePath_;
 		fs::path fileTemplatePath_;
 		boost::uuids::random_generator uuidGenerator_;
 	};
 }
-
-

@@ -14,15 +14,11 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-#include "stdafx.h"
-#include <tchar.h>
+#pragma once
 
-#include "ToolsCross/Log.hpp"
+#include "ExceptionBase.hpp"
 
-//-----------------------------------------------------------------------------
-int _tmain(int argc, _TCHAR* argv[])
-{
-	Tools::EnableLogger(false);
-	::testing::InitGoogleMock(&argc, argv);
-	return RUN_ALL_TESTS();
-}
+GENERATE_EXCEPTION_CLASS(Tools, ToolsException);
+
+#define THROW(message) THROW_BASE(Tools, ToolsException, message)
+

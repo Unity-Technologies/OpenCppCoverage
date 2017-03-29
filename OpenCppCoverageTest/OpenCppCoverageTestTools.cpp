@@ -20,7 +20,7 @@
 #include <boost/filesystem.hpp>
 #include <Poco/Process.h>
 
-#include "Tools/Tool.hpp"
+#include "ToolsCross/Tool.hpp"
 #include "CppCoverage/OptionsParser.hpp"
 #include "CppCoverage/ProgramOptions.hpp"
 

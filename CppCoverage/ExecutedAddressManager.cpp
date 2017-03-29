@@ -20,11 +20,11 @@
 #include <unordered_map>
 #include <boost/container/small_vector.hpp>
 
-#include "tools/Log.hpp"
+#include <ToolsCross/Log.hpp>
 
-#include "CppCoverageException.hpp"
-#include "ModuleCoverage.hpp"
-#include "FileCoverage.hpp"
+#include <CppCoverageCross/CppCoverageException.hpp>
+#include <CppCoverageCross/ModuleCoverage.hpp>
+#include <CppCoverageCross/FileCoverage.hpp>
 #include "Address.hpp"
 
 namespace CppCoverage

@@ -33,8 +33,8 @@
 #include "Exporter/Binary/BinaryExporter.hpp"
 #include "Exporter/Binary/CoverageDataDeserializer.hpp"
 
-#include "Tools/Tool.hpp"
-#include "Tools/Log.hpp"
+#include "ToolsCross/Tool.hpp"
+#include "ToolsCross/Log.hpp"
 
 namespace cov = CppCoverage;
 namespace logging = boost::log;

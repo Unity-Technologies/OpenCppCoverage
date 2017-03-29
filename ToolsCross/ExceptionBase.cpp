@@ -14,27 +14,14 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-#include "stdafx.h"
-#include "LineCoverage.hpp"
+#include "ExceptionBase.hpp"
+#include "Tool.hpp"
 
-namespace CppCoverage
+namespace Tools
 {
 	//-------------------------------------------------------------------------
-	LineCoverage::LineCoverage(unsigned int lineNumber, bool hasBeenExecuted)
-		: lineNumber_(lineNumber)
-		, hasBeenExecuted_(hasBeenExecuted)
+	ExceptionBase::ExceptionBase(const std::wstring& message)
+		: std::runtime_error(ToLocalString(message).c_str())
 	{
-	}
-		
-	//-------------------------------------------------------------------------
-	unsigned int LineCoverage::GetLineNumber() const
-	{
-		return lineNumber_;
-	}
-
-	//-------------------------------------------------------------------------
-	bool LineCoverage::HasBeenExecuted() const
-	{
-		return hasBeenExecuted_;
 	}
 }

@@ -1,5 +1,5 @@
 // OpenCppCoverage is an open source code coverage for C++.
-// Copyright (C) 2014 OpenCppCoverage
+// Copyright (C) 2016 OpenCppCoverage
 //
 // This program is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -14,34 +14,24 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-#include "stdafx.h"
-#include "CppCoverageException.hpp"
+#include "UniquePath.hpp"
 
-#include <sstream>
+#include <boost/filesystem/path.hpp>
 
-#include "Tools/Tool.hpp"
-
-namespace CppCoverage
-{	
+namespace Tools
+{
 	//-------------------------------------------------------------------------
-	std::wstring GetErrorMessage(int lastErrorCode)
-	{			
-		std::vector<wchar_t> sysMsg(64 * 1024);
-		std::wostringstream ostr;
-			
-		if (FormatMessage(
-				FORMAT_MESSAGE_FROM_SYSTEM,
-				NULL, lastErrorCode,
-				MAKELANGID(LANG_NEUTRAL, SUBLANG_NEUTRAL),
-				&sysMsg[0], static_cast<int>(sysMsg.size()), NULL))
-		{
-			ostr << &sysMsg[0];
-		}
-		else
-		{
-			ostr << "Last error code:" << lastErrorCode;
-		}
+	boost::filesystem::path UniquePath::GetUniquePath(const boost::filesystem::path& path)
+	{
+		auto uniquePath = path;
+		auto filenameWithoutExtension = path.filename().replace_extension(L"");
 
-		return ostr.str();
+		for (int i = 2; existingPathSet_.count(uniquePath) != 0; ++i)
+		{
+			auto filename = filenameWithoutExtension.wstring() + std::to_wstring(i) + path.extension().wstring();
+			uniquePath = path.parent_path() / filename;
+		}
+		existingPathSet_.insert(uniquePath);
+		return uniquePath;
 	}
 }
