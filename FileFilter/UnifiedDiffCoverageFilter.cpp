@@ -19,7 +19,7 @@
 #include <fstream>
 #include <sstream>
 #include <boost/optional/optional.hpp>
-#include "Tools/Log.hpp"
+#include <ToolsCross/Log.hpp>
 #include "UnifiedDiffCoverageFilter.hpp"
 #include "UnifiedDiffParser.hpp"
 #include "File.hpp"

@@ -26,11 +26,11 @@
 
 #include "../ExporterException.hpp"
 
-#ifdef _WIN_32
-#include "Tools/Tool.hpp"
-#elif __linux__
+#ifdef __linux__
+#include <ToolsLinux/Tool.hpp>
 #include <fstream>
-#include <ToolsCross/Tool.hpp>
+#elif _WIN32
+#include <Tools/Tool.hpp>
 #endif
 
 #include "ProtoBuff.hpp"

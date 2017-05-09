@@ -18,7 +18,11 @@
 
 #include <boost/optional/optional.hpp>
 
-#include "Tool.hpp"
+#ifdef _WIN32
+#include <Tools/Tool.hpp>
+#elif __linux__
+#include <ToolsLinux/Tool.hpp>
+#endif
 #include "Log.hpp"
 
 namespace Tools

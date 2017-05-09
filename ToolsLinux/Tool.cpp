@@ -24,6 +24,11 @@
 #include "ToolsException.hpp"
 #include "ScopedAction.hpp"
 
+#if defined(_MSC_VER)
+#include <BaseTsd.h>
+typedef SSIZE_T ssize_t;
+#endif
+
 namespace fs = boost::filesystem;
 
 namespace Tools

@@ -21,10 +21,10 @@
 #include <boost/algorithm/string.hpp>
 #include <boost/uuid/uuid_io.hpp>
 #include <boost/lexical_cast.hpp>
-#ifdef _WIN_32
+#ifdef _WIN32
 #include "Tools/Tool.hpp"
 #elif __linux__
-#include <ToolsCross/Tool.hpp>
+#include <ToolsLinux/Tool.hpp>
 #include <fstream>
 #endif
 

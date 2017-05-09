@@ -23,8 +23,8 @@
 
 #include "CoverageDataSerializer.hpp"
 #ifdef __linux__
-#include <ToolsCross/Tool.hpp>
-#elif _WIN_32
+#include <ToolsLinux/Tool.hpp>
+#elif _WIN32
 #include <Tools/Tool.hpp>
 #endif
 

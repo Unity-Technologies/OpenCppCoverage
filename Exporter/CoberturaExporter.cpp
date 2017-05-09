@@ -28,7 +28,7 @@
 #include <CppCoverageCross/LineCoverage.hpp>
 #include <CppCoverageCross/CoverageRateComputer.hpp>
 
-#ifdef _WIN_32
+#ifdef _WIN32
 #include "Tools/Tool.hpp"
 #elif __linux__
 #include <ToolsCross/Tool.hpp>

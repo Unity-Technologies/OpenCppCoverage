@@ -19,7 +19,11 @@
 
 #include <boost/algorithm/string.hpp>
 
-#include <ToolsCross/Tool.hpp>
+#ifdef _WIN32
+#include <Tools/Tool.hpp>
+#elif __linux__
+#include <ToolsLinux/Tool.hpp>
+#endif
 
 namespace CppCoverage
 {

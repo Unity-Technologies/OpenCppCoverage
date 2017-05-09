@@ -22,7 +22,11 @@
 #include <boost/uuid/uuid_generators.hpp>
 
 #include <CppCoverageCross/CppCoverageException.hpp>
-#include <ToolsCross/Tool.hpp>
+#ifdef _WIN32
+#include <Tools/Tool.hpp>
+#elif __linux__
+#include <ToolsLinux/Tool.hpp>
+#endif
 #include <ToolsCross/Log.hpp>
 #include <ToolsCross/ScopedAction.hpp>
 

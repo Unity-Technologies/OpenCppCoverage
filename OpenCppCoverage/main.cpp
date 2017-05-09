@@ -22,7 +22,11 @@
 #include <iostream>
 #include <boost/filesystem.hpp>
 
-#include "ToolsCross/Tool.hpp"
+#ifdef _WIN32
+#include <Tools/Tool.hpp>
+#elif __linux__
+#include <ToolsLinux/Tool.hpp>
+#endif
 
 #include "OpenCppCoverage.hpp"
 

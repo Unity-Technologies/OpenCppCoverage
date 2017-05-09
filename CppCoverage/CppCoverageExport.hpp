@@ -16,11 +16,12 @@
 
 #pragma once
 
-#ifdef CPPCOVERAGE_EXPORTS
-	#define CPPCOVERAGE_DLL __declspec(dllexport)
-#else
-	#define CPPCOVERAGE_DLL _declspec(dllimport)
-#endif
+//#ifdef CPPCOVERAGE_EXPORTS
+//	#define CPPCOVERAGE_DLL __declspec(dllexport)
+//#else
+//	#define CPPCOVERAGE_DLL _declspec(dllimport)
+//#endif
+#define CPPCOVERAGE_DLL 
 
 #pragma warning (disable: 4251)
 

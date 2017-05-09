@@ -21,7 +21,11 @@
 #include <boost/optional/optional.hpp>
 
 #include "Tools/DbgHelp.hpp"
-#include <ToolsCross/Tool.hpp>
+#ifdef _WIN32
+#include <Tools/Tool.hpp>
+#elif __linux__
+#include <ToolsLinux/Tool.hpp>
+#endif
 #include <ToolsCross/Log.hpp>
 
 #include <CppCoverageCross/CppCoverageException.hpp>

@@ -20,10 +20,15 @@
 #include <string>
 #include <vector>
 #include <sstream>
+#include <iostream>
 #include <boost/filesystem.hpp>
 
 #include <CppCoverageCross/CppCoverageException.hpp>
-#include <ToolsCross/Tool.hpp>
+#ifdef _WIN32
+#include <Tools/Tool.hpp>
+#elif __linux__
+#include <ToolsLinux/Tool.hpp>
+#endif
 
 #include "Options.hpp"
 #include "OptionsExport.hpp"
@@ -88,6 +93,16 @@ namespace CppCoverage
 
 			return patterns;
 		}
+
+        cov::Patterns GetSourcePatterns(const po::variables_map& variables)
+        {
+            cov::Patterns patterns{ false };
+
+            auto selectedPatterns = GetValue<std::vector<std::string>>(variables, ProgramOptions::SelectedSourcesOption);
+            for (const auto& pattern : selectedPatterns)
+                patterns.AddSelectedPatterns(Tools::LocalToWString(pattern));
+            return patterns;
+        }
 
 		//---------------------------------------------------------------------
 		struct OptionsParserException: std::runtime_error
@@ -247,6 +262,38 @@ namespace CppCoverage
 					options.AddExcludedLineRegex(Tools::LocalToWString(excludedLineRegex));
 			}
 		}
+
+        cov::Patterns AddResponseFile(const po::variables_map& variables, Options& options)
+        {
+            auto responseFiles = GetOptionalValue<std::vector<std::string>>(
+                variables, ProgramOptions::ResponseSourcesOption);
+            cov::Patterns patterns{ false };
+
+            if (responseFiles)
+            {
+                for (const auto& response : *responseFiles)
+                {
+                    std::ifstream t(response);
+                    std::stringstream strbuffer;
+
+                    strbuffer << t.rdbuf();
+                    std::string s = strbuffer.str();
+
+                    size_t pos = 0;
+                    std::string token;
+                    std::string delimiter = " ";
+                    while ((pos = s.find(delimiter)) != std::string::npos) {
+                        token = s.substr(0, pos);
+                        if (token.compare("--sources") != 0) {
+                            patterns.AddSelectedPatterns(Tools::LocalToWString(token));
+                        }
+                        s.erase(0, pos + delimiter.length());
+                    }
+                    return patterns;
+                }
+            }
+            return patterns;
+        }
 	}
 		
 	//-------------------------------------------------------------------------
@@ -331,7 +378,7 @@ namespace CppCoverage
 
 		auto optionalStartInfo = GetStartInfo(variables);
 		Options options{ modulePatterns, sourcePatterns, optionalStartInfo.get_ptr() };
-		
+
 		bool isVerbose = IsOptionSelected(variables, ProgramOptions::VerboseOption);
 		bool isQuiet = IsOptionSelected(variables, ProgramOptions::QuietOption);
 
@@ -358,6 +405,11 @@ namespace CppCoverage
 		AddInputCoverages(variables, options);
 		AddUnifiedDiff(variables, options);
 		AddExcludedLineRegexes(variables, options);
+        auto newSourcePatterns = AddResponseFile(variables, options);
+        if (!newSourcePatterns.GetSelectedPatterns().empty())
+        {
+            options.SetSourcePatterns(newSourcePatterns);
+        }
 
 		if (!options.GetStartInfo() && options.GetInputCoveragePaths().empty())
 			throw OptionsParserException("You must specify a program to execute or use --" + ProgramOptions::InputCoverageValue);
