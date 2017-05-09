@@ -14,19 +14,24 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-#include "stdafx.h"
+#include "../stdafx.h"
 #include "CoverageDataSerializer.hpp"
 
 #include "CoverageData.pb.h"
 
-#include "CppCoverage/CoverageData.hpp"
-#include "CppCoverage/ModuleCoverage.hpp"
-#include "CppCoverage/FileCoverage.hpp"
-#include "CppCoverage/LineCoverage.hpp"
+#include <CppCoverageCross/CoverageData.hpp>
+#include <CppCoverageCross/ModuleCoverage.hpp>
+#include <CppCoverageCross/FileCoverage.hpp>
+#include <CppCoverageCross/LineCoverage.hpp>
 
 #include "../ExporterException.hpp"
 
-#include "Tools/Tool.hpp"
+#ifdef __linux__
+#include <ToolsLinux/Tool.hpp>
+#include <fstream>
+#elif _WIN32
+#include <Tools/Tool.hpp>
+#endif
 
 #include "ProtoBuff.hpp"
 
@@ -95,11 +100,11 @@ namespace Exporter
 	void CoverageDataSerializer::Serialize(
 		const cov::CoverageData& coverageData,
 		const boost::filesystem::path& output) const
-	{		
+	{
 		pb::CoverageData coverageDataProtoBuff;
 		Tools::CreateParentFolderIfNeeded(output);
 
-		std::ofstream ofs(output.string(), std::ios::binary);		
+		std::ofstream ofs(output.string(), std::ios::binary);
 		google::protobuf::io::OstreamOutputStream outputStream(&ofs);
 		google::protobuf::io::CodedOutputStream codedOutputStream(&outputStream);
 

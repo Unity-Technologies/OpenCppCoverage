@@ -20,7 +20,7 @@
 #include <sstream>
 #include <boost/regex.hpp>
 
-#include "Tools/Log.hpp"
+#include <ToolsCross/Log.hpp>
 
 #include "CoverageFilterSettings.hpp"
 #include "Patterns.hpp"

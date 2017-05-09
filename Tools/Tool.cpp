@@ -23,9 +23,9 @@
 #include <codecvt>
 
 #include "DbgHelp.hpp"
-#include "Log.hpp"
-#include "ToolsException.hpp"
-#include "ScopedAction.hpp"
+#include <ToolsCross/ToolsException.hpp>
+#include <ToolsCross/Log.hpp>
+#include <ToolsCross/ScopedAction.hpp>
 
 namespace fs = boost::filesystem;
 

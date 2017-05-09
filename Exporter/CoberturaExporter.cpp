@@ -22,13 +22,17 @@
 #include <boost/filesystem.hpp>
 
 #include "CoberturaExporter.hpp"
-#include "CppCoverage/CoverageData.hpp"
-#include "CppCoverage/ModuleCoverage.hpp"
-#include "CppCoverage/FileCoverage.hpp"
-#include "CppCoverage/LineCoverage.hpp"
-#include "CppCoverage/CoverageRateComputer.hpp"
+#include <CppCoverageCross/CoverageData.hpp>
+#include <CppCoverageCross/ModuleCoverage.hpp>
+#include <CppCoverageCross/FileCoverage.hpp>
+#include <CppCoverageCross/LineCoverage.hpp>
+#include <CppCoverageCross/CoverageRateComputer.hpp>
 
+#ifdef _WIN32
 #include "Tools/Tool.hpp"
+#elif __linux__
+#include <ToolsCross/Tool.hpp>
+#endif
 
 namespace cov = CppCoverage;
 namespace property_tree = boost::property_tree;

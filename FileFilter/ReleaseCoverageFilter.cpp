@@ -17,7 +17,7 @@
 #include "stdafx.h"
 #include "ReleaseCoverageFilter.hpp"
 
-#include "Tools/Log.hpp"
+#include <ToolsCross/Log.hpp>
 
 #include "IRelocationsExtractor.hpp"
 #include "RelocationsExtractor.hpp"

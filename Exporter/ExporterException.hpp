@@ -16,7 +16,7 @@
 
 #pragma once
 
-#include "tools/ExceptionBase.hpp"
+#include <ToolsCross/ExceptionBase.hpp>
 
 GENERATE_EXCEPTION_CLASS(Exporter, ExporterException);
 

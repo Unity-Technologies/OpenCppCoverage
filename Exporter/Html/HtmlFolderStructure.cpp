@@ -14,15 +14,18 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-#include "stdafx.h"
+#include "../stdafx.h"
 #include "HtmlFolderStructure.hpp"
 
 #include <boost/algorithm/string.hpp>
 
 #include "Exporter/ExporterException.hpp"
-
+#ifdef _WIN_32
 #include "Tools/Tool.hpp"
-#include "Tools/UniquePath.hpp"
+#elif __linux__
+#include <ToolsCross/Tool.hpp>
+#endif
+#include <ToolsCross/UniquePath.hpp>
 
 namespace fs = boost::filesystem;
 

@@ -20,11 +20,15 @@
 #include <Windows.h>
 #include <boost/optional.hpp>
 
-#include "Tools/Log.hpp"
-#include "Tools/Tool.hpp"
+#include <CppCoverageCross/CppCoverageException.hpp>
+#include <ToolsCross/Log.hpp>
+#ifdef _WIN32
+#include <Tools/Tool.hpp>
+#elif __linux__
+#include <ToolsLinux/Tool.hpp>
+#endif
 
 #include "StartInfo.hpp"
-#include "CppCoverageException.hpp"
 
 namespace CppCoverage
 {

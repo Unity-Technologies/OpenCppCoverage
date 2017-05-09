@@ -14,7 +14,7 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-#include "stdafx.h"
+#include "../stdafx.h"
 #include "BinaryExporter.hpp"
 
 #include <fstream>
@@ -22,8 +22,11 @@
 #include <boost/filesystem.hpp>
 
 #include "CoverageDataSerializer.hpp"
-
-#include "Tools/Tool.hpp"
+#ifdef __linux__
+#include <ToolsLinux/Tool.hpp>
+#elif _WIN32
+#include <Tools/Tool.hpp>
+#endif
 
 namespace Exporter
 {

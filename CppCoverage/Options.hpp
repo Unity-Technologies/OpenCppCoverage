@@ -47,6 +47,7 @@ namespace CppCoverage
 		Options(Options&&) = default;
 		~Options();
 
+        void SetSourcePatterns(Patterns& sourcePattern);
 		const Patterns& GetModulePatterns() const;
 		const Patterns& GetSourcePatterns() const;
 		const StartInfo* GetStartInfo() const;

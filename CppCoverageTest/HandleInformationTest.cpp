@@ -20,7 +20,7 @@
 
 #include "CppCoverage/HandleInformation.hpp"
 #include "TestCoverageConsole/TestCoverageConsole.hpp"
-#include "Tools/Tool.hpp"
+#include "ToolsCross/Tool.hpp"
 
 #include "TestTools.hpp"
 

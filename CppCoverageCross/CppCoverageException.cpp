@@ -14,29 +14,40 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-#include "../stdafx.h"
-#include "HtmlFile.hpp"
+#include "CppCoverageException.hpp"
 
-namespace Exporter
-{
-	//-------------------------------------------------------------------------
-	HtmlFile::HtmlFile(
-		boost::filesystem::path absolutePath,
-		boost::filesystem::path relativeLinkPath)
-		: absolutePath_(absolutePath)
-		, relativeLinkPath_(relativeLinkPath)
-	{
-	}
+#include <sstream>
+#include <vector>
+#ifdef _WIN32
+#include <Tools/Tool.hpp>
+#elif __linux__
+#include <ToolsLinux/Tool.hpp>
+#endif
 
+namespace CppCoverage
+{	
 	//-------------------------------------------------------------------------
-	const boost::filesystem::path& HtmlFile::GetAbsolutePath() const
+	std::wstring GetErrorMessage(int lastErrorCode)
 	{
-		return absolutePath_;
-	}
+		std::vector<wchar_t> sysMsg(64 * 1024);
+		std::wostringstream ostr;
+#ifdef _WIN_32
+		if (FormatMessage(
+				FORMAT_MESSAGE_FROM_SYSTEM,
+				NULL, lastErrorCode,
+				MAKELANGID(LANG_NEUTRAL, SUBLANG_NEUTRAL),
+				&sysMsg[0], static_cast<int>(sysMsg.size()), NULL))
+		{
+			ostr << &sysMsg[0];
+		}
+		else
+		{
+			ostr << "Last error code:" << lastErrorCode;
+		}
+#elif __LINUX__
+        ostr << "Last error code:" << lastErrorCode;
+#endif
 
-	//-------------------------------------------------------------------------
-	const boost::filesystem::path& HtmlFile::GetRelativeLinkPath() const
-	{
-		return relativeLinkPath_;
+		return ostr.str();
 	}
 }

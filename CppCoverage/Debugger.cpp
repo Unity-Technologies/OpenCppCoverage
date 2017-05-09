@@ -17,14 +17,17 @@
 #include "stdafx.h"
 #include "Debugger.hpp"
 
-#include "tools/Log.hpp"
-#include "tools/ScopedAction.hpp"
+#include <CppCoverageCross/CppCoverageException.hpp>
+#include <ToolsCross/Log.hpp>
+#include <ToolsCross/ScopedAction.hpp>
+#ifdef _WIN32
+#include <Tools/Tool.hpp>
+#elif __linux__
+#include <ToolsLinux/Tool.hpp>
+#endif
 
 #include "Process.hpp"
-#include "CppCoverageException.hpp"
 #include "IDebugEventsHandler.hpp"
-
-#include "Tools/Tool.hpp"
 
 namespace CppCoverage
 {

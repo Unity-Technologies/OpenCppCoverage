@@ -17,7 +17,7 @@
 #include "stdafx.h"
 #include "MappedFile.hpp"
 
-#include "ToolsException.hpp"
+#include <ToolsCross/ToolsException.hpp>
 
 #include <boost/iostreams/device/mapped_file.hpp>
 #include <boost/filesystem/operations.hpp>

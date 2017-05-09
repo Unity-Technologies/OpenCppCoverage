@@ -21,9 +21,10 @@
 #include <boost/optional.hpp>
 #include <boost/filesystem.hpp>
 
-#include "tools/Log.hpp"
+#include <CppCoverageCross/CoverageData.hpp>
+#include <CppCoverageCross/CppCoverageException.hpp>
+#include <ToolsCross/Log.hpp>
 
-#include "CoverageData.hpp"
 #include "Debugger.hpp"
 #include "DebugInformation.hpp"
 #include "ExecutedAddressManager.hpp"
@@ -32,7 +33,6 @@
 #include "CoverageFilterManager.hpp"
 #include "StartInfo.hpp"
 #include "ExceptionHandler.hpp"
-#include "CppCoverageException.hpp"
 #include "Address.hpp"
 #include "RunCoverageSettings.hpp"
 

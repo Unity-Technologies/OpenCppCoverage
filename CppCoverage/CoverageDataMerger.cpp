@@ -17,10 +17,10 @@
 #include "stdafx.h"
 #include "CoverageDataMerger.hpp"
 
-#include "CoverageData.hpp"
-#include "ModuleCoverage.hpp"
-#include "FileCoverage.hpp"
-#include "LineCoverage.hpp"
+#include <CppCoverageCross/CoverageData.hpp>
+#include <CppCoverageCross/ModuleCoverage.hpp>
+#include <CppCoverageCross/FileCoverage.hpp>
+#include <CppCoverageCross/LineCoverage.hpp>
 
 namespace fs = boost::filesystem;
 

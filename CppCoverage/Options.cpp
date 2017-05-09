@@ -16,7 +16,9 @@
 
 #include "stdafx.h"
 #include "Options.hpp"
-#include "CppCoverageException.hpp"
+
+#include <CppCoverageCross/CppCoverageException.hpp>
+
 #include "OptionsExport.hpp"
 
 namespace CppCoverage
@@ -58,6 +60,11 @@ namespace CppCoverage
 	Options::~Options() = default;
 
 	//-------------------------------------------------------------------------
+    void Options::SetSourcePatterns(Patterns& sourcePattern)
+    {
+        sources_ = sourcePattern;
+    }
+
 	const Patterns& Options::GetModulePatterns() const
 	{
 		return modules_;

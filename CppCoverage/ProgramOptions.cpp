@@ -19,9 +19,13 @@
 
 #include <boost/make_shared.hpp>
 
-#include "Tools/Tool.hpp"
+#include <CppCoverageCross/CppCoverageException.hpp>
+#ifdef _WIN32
+#include <Tools/Tool.hpp>
+#elif __linux__
+#include <ToolsLinux/Tool.hpp>
+#endif
 
-#include "CppCoverageException.hpp"
 #include "OptionsParser.hpp"
 
 namespace po = boost::program_options;
@@ -117,6 +121,8 @@ namespace CppCoverage
 				(ProgramOptions::ContinueAfterCppExceptionOption.c_str(), "Try to continue after throwing a C++ exception.")
 				(ProgramOptions::OptimizedBuildOption.c_str(), 
 					"Enable heuristics to support optimized build. See documentation for restrictions.")
+                (ProgramOptions::ResponseSourcesOption.c_str(),
+                    po::value<T_Strings>()->composing(), "Adding source arguments as part of a response file."),
 				(ProgramOptions::ExcludedLineRegexOption.c_str(), po::value<T_Strings>()->composing(),
 					"Exclude all lines match the regular expression. Regular expression must match the whole line.");
 		}
@@ -158,6 +164,7 @@ namespace CppCoverage
 	const std::string ProgramOptions::ContinueAfterCppExceptionOption = "continue_after_cpp_exception";
 	const std::string ProgramOptions::OptimizedBuildOption = "optimized_build";
 	const std::string ProgramOptions::ExcludedLineRegexOption = "excluded_line_regex";
+    const std::string ProgramOptions::ResponseSourcesOption = "response";
 
 	//-------------------------------------------------------------------------
 	ProgramOptions::ProgramOptions(const std::vector<std::string>& exportTypes)

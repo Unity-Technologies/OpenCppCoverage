@@ -17,7 +17,7 @@
 #include "stdafx.h"
 #include "CoverageFilterSettings.hpp"
 
-#include "Tools/Log.hpp"
+#include <ToolsCross/Log.hpp>
 
 namespace CppCoverage
 {

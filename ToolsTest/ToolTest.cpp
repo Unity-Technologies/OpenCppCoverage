@@ -15,7 +15,7 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 #include "stdafx.h"
-#include "Tools/Tool.hpp"
+#include "ToolsCross/Tool.hpp"
 
 namespace ToolsTests
 {
@@ -25,7 +25,7 @@ namespace ToolsTests
 		ASSERT_EQ("", Tools::ToLocalString(L""));
 		ASSERT_EQ("123456789", Tools::ToLocalString(L"123456789"));
 		ASSERT_EQ(1, Tools::ToLocalString(L"1").size());
-		ASSERT_EQ(std::string("éàè"), Tools::ToLocalString(L"éàè"));
+		ASSERT_EQ(std::string("ï¿½ï¿½ï¿½"), Tools::ToLocalString(L"ï¿½ï¿½ï¿½"));
 	}
 
 	//---------------------------------------------------------------------
@@ -34,12 +34,12 @@ namespace ToolsTests
 		ASSERT_EQ(L"", Tools::LocalToWString(""));
 		ASSERT_EQ(L"123456789", Tools::LocalToWString("123456789"));
 		ASSERT_EQ(1, Tools::LocalToWString("1").size());
-		ASSERT_EQ(std::wstring(L"éàè"), Tools::LocalToWString("éàè"));
+		ASSERT_EQ(std::wstring(L"ï¿½ï¿½ï¿½"), Tools::LocalToWString("ï¿½ï¿½ï¿½"));
 	}
 
 	//---------------------------------------------------------------------
 	TEST(Tool, Uft8)
 	{
-		ASSERT_EQ(L"éàè", Tools::Utf8ToWString(Tools::ToUtf8String(L"éàè")));
+		ASSERT_EQ(L"ï¿½ï¿½ï¿½", Tools::Utf8ToWString(Tools::ToUtf8String(L"ï¿½ï¿½ï¿½")));
 	}
 }

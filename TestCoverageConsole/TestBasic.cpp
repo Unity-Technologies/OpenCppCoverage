@@ -19,8 +19,8 @@
 #include <iostream>
 #include <windows.h>
 
-#include "Tools/Tool.hpp"
-#include "Tools/ScopedAction.hpp"
+#include "ToolsCross/Tool.hpp"
+#include "ToolsCross/ScopedAction.hpp"
 
 #include "TestCoverageConsole.hpp"
 

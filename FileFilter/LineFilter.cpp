@@ -19,8 +19,12 @@
 
 #include "FileFilter/FileInfo.hpp"
 #include "FileFilter/LineInfo.hpp"
-#include "Tools/Log.hpp"
-#include "Tools/Tool.hpp"
+#include <ToolsCross/Log.hpp>
+#ifdef _WIN32
+#include <Tools/Tool.hpp>
+#elif __linux__
+#include <ToolsLinux/Tool.hpp>
+#endif
 #include "Tools/MappedFile.hpp"
 
 namespace FileFilter

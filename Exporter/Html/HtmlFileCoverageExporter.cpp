@@ -14,7 +14,7 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-#include "stdafx.h"
+#include "../stdafx.h"
 #include "HtmlFileCoverageExporter.hpp"
 
 #include <fstream>
@@ -22,7 +22,7 @@
 #include <boost/spirit/include/classic.hpp>
 #include <boost/spirit/include/classic_tree_to_xml.hpp>
 
-#include "CppCoverage/FileCoverage.hpp"
+#include <CppCoverageCross/FileCoverage.hpp>
 
 #include "../ExporterException.hpp"
 

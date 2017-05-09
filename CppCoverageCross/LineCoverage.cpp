@@ -14,11 +14,26 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-#pragma once
+#include "LineCoverage.hpp"
 
-#include "Tools/ExceptionBase.hpp"
+namespace CppCoverage
+{
+	//-------------------------------------------------------------------------
+	LineCoverage::LineCoverage(unsigned int lineNumber, bool hasBeenExecuted)
+		: lineNumber_(lineNumber)
+		, hasBeenExecuted_(hasBeenExecuted)
+	{
+	}
+		
+	//-------------------------------------------------------------------------
+	unsigned int LineCoverage::GetLineNumber() const
+	{
+		return lineNumber_;
+	}
 
-GENERATE_EXCEPTION_CLASS(Tools, ToolsException);
-
-#define THROW(message) THROW_BASE(Tools, ToolsException, message)
-
+	//-------------------------------------------------------------------------
+	bool LineCoverage::HasBeenExecuted() const
+	{
+		return hasBeenExecuted_;
+	}
+}

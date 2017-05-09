@@ -19,7 +19,7 @@
 
 #include <Psapi.h>
 #include <boost/algorithm/string.hpp>
-#include "CppCoverageException.hpp"
+#include <CppCoverageCross/CppCoverageException.hpp>
 
 namespace CppCoverage
 {

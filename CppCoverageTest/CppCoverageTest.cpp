@@ -17,7 +17,7 @@
 #include "stdafx.h"
 #include <tchar.h>
 
-#include "Tools/Log.hpp"
+#include "ToolsCross/Log.hpp"
 
 //-----------------------------------------------------------------------------
 int _tmain(int argc, _TCHAR* argv[])

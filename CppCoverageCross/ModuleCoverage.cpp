@@ -14,62 +14,40 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-#include "stdafx.h"
-#include "FileCoverage.hpp"
+#include "ModuleCoverage.hpp"
 
-#include "CppCoverageException.hpp"
+#include "FileCoverage.hpp"
 
 namespace CppCoverage
 {
 	//-------------------------------------------------------------------------
-	FileCoverage::FileCoverage(const boost::filesystem::path& path)
+	ModuleCoverage::ModuleCoverage(const boost::filesystem::path& path)
 		: path_(path)
 	{
 	}
 
 	//-------------------------------------------------------------------------
-	void FileCoverage::AddLine(unsigned int lineNumber, bool hasBeenExecuted)
+	ModuleCoverage::~ModuleCoverage()
 	{
-		LineCoverage line{ lineNumber, hasBeenExecuted };
-
-		if (!lines_.emplace(lineNumber, line).second)
-			THROW(L"Line " << lineNumber << L" already exists for " << path_.wstring());
 	}
 
 	//-------------------------------------------------------------------------
-	void FileCoverage::UpdateLine(unsigned int lineNumber, bool hasBeenExecuted)
+	FileCoverage& ModuleCoverage::AddFile(const boost::filesystem::path& filePath)
 	{
-		if (!lines_.erase(lineNumber))
-			THROW(L"Line " << lineNumber << L" does not exists and cannot be updated for " << path_.wstring());
+		files_.push_back(std::unique_ptr<FileCoverage>(new FileCoverage(filePath)));
 
-		AddLine(lineNumber, hasBeenExecuted);
+		return *files_.back();
 	}
 
 	//-------------------------------------------------------------------------
-	const boost::filesystem::path& FileCoverage::GetPath() const
+	const boost::filesystem::path& ModuleCoverage::GetPath() const
 	{
 		return path_;
 	}
 
 	//-------------------------------------------------------------------------
-	const LineCoverage* FileCoverage::operator[](unsigned int line) const
+	const ModuleCoverage::T_FileCoverageCollection& ModuleCoverage::GetFiles() const
 	{
-		auto it = lines_.find(line);
-
-		if (it == lines_.end())
-			return 0;
-
-		return &it->second;
+		return files_;
 	}
-		
-	//-------------------------------------------------------------------------
-	std::vector<LineCoverage> FileCoverage::GetLines() const
-	{
-		std::vector<LineCoverage> lines;
-		
-		for (const auto& pair : lines_)
-			lines.push_back(pair.second);
-		
-		return lines;
-	}	
 }

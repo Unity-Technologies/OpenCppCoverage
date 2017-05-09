@@ -14,19 +14,18 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-#pragma once
+#include "ExceptionBase.hpp"
+#ifdef _WIN32
+#include <Tools/Tool.hpp>
+#elif __linux__
+#include <ToolsLinux/Tool.hpp>
+#endif
 
-#include "tools/ExceptionBase.hpp"
-#include "CppCoverageExport.hpp"
-#include <string>
-
-namespace CppCoverage
+namespace Tools
 {
-	CPPCOVERAGE_DLL std::wstring GetErrorMessage(int errorCode);
+	//-------------------------------------------------------------------------
+	ExceptionBase::ExceptionBase(const std::wstring& message)
+		: std::runtime_error(ToLocalString(message).c_str())
+	{
+	}
 }
-
-
-GENERATE_EXCEPTION_CLASS(CppCoverage, CppCoverageException);
-
-#define THROW(message) THROW_BASE(CppCoverage, CppCoverageException, message)
-#define THROW_LAST_ERROR(message, lastErrorCode) THROW_BASE(CppCoverage, CppCoverageException, message << CppCoverage::GetErrorMessage(lastErrorCode))

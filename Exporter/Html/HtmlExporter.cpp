@@ -14,21 +14,25 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-#include "stdafx.h"
+#include "../stdafx.h"
 #include "HtmlExporter.hpp"
 
 #include <sstream>
 #include <iomanip>
 #include "CTemplate.hpp"
 
-#include "CppCoverage/CoverageData.hpp"
-#include "CppCoverage/ModuleCoverage.hpp"
-#include "CppCoverage/FileCoverage.hpp"
-#include "CppCoverage/CoverageRateComputer.hpp"
-#include "CppCoverage/CoverageRate.hpp"
+#include <CppCoverageCross/CoverageData.hpp>
+#include <CppCoverageCross/ModuleCoverage.hpp>
+#include <CppCoverageCross/FileCoverage.hpp>
+#include <CppCoverageCross/CoverageRateComputer.hpp>
+#include <CppCoverageCross/CoverageRate.hpp>
 
-#include "Tools/Log.hpp"
+#include "ToolsCross/Log.hpp"
+#ifdef _WIN32
 #include "Tools/Tool.hpp"
+#elif __linux__
+#include <ToolsLinux/Tool.hpp>
+#endif
 
 #include "TemplateHtmlExporter.hpp"
 #include "HtmlFileCoverageExporter.hpp"

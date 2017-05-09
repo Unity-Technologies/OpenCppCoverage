@@ -14,33 +14,18 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-#include "stdafx.h"
-#include "ScopedAction.hpp"
+#pragma once
 
-#include <boost/optional/optional.hpp>
+#include <ToolsCross/ExceptionBase.hpp>
+#include "CppCoverageExport.hpp"
+#include <string>
 
-#include "Tool.hpp"
-
-#include "Log.hpp"
-
-namespace Tools
+namespace CppCoverage
 {
-	//-------------------------------------------------------------------------
-	ScopedAction::ScopedAction(std::function<void()> action)
-		: action_(action)
-	{
-	}
-
-	//-------------------------------------------------------------------------
-	ScopedAction::~ScopedAction()
-	{
-		auto error = Try([&]
-		{
-			action_();
-		});
-
-		if (error)
-			LOG_ERROR << *error;
-	}
-
+	CPPCOVERAGE_DLL std::wstring GetErrorMessage(int errorCode);
 }
+
+GENERATE_EXCEPTION_CLASS(CppCoverage, CppCoverageException);
+
+#define THROW(message) THROW_BASE(CppCoverage, CppCoverageException, message)
+#define THROW_LAST_ERROR(message, lastErrorCode) THROW_BASE(CppCoverage, CppCoverageException, message << CppCoverage::GetErrorMessage(lastErrorCode))

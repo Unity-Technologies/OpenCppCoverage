@@ -23,8 +23,12 @@
 #include "FileFilter/FileInfo.hpp"
 #include "FileFilter/LineInfo.hpp"
 
-#include "Tools/Tool.hpp"
-#include "Tools/Log.hpp"
+#ifdef _WIN32
+#include <Tools/Tool.hpp>
+#elif __linux__
+#include <ToolsLinux/Tool.hpp>
+#endif
+#include <ToolsCross/Log.hpp>
 
 namespace CppCoverage
 {
@@ -173,7 +177,7 @@ namespace CppCoverage
 			for (const auto& lineInfo : fileInfo.lineInfoColllection_)
 				executableLinesSet.insert(lineInfo.lineNumber_);
 			LOG_DEBUG << L"Executable lines for " << filePath << L": ";
-			LOG_DEBUG << executableLinesSet;
+			//LOG_DEBUG << executableLinesSet;
 			executableLineCache_.currentFilePath = filePath;
 		}
 		return executableLineCache_.executableLinesSet;

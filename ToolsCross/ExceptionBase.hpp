@@ -27,8 +27,7 @@
 
 namespace Tools
 {
-
-	class TOOLS_DLL ExceptionBase : public std::exception
+	class TOOLS_DLL ExceptionBase : public std::runtime_error
 	{
 	protected:
 		ExceptionBase(const std::wstring& message);

@@ -14,21 +14,26 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-#include "stdafx.h"
+#include "../stdafx.h"
 #include "CoverageDataDeserializer.hpp"
 
 #include "CoverageData.pb.h"
 
-#include "CppCoverage/CoverageData.hpp"
-#include "CppCoverage/ModuleCoverage.hpp"
-#include "CppCoverage/FileCoverage.hpp"
+#include <CppCoverageCross/CoverageData.hpp>
+#include <CppCoverageCross/ModuleCoverage.hpp>
+#include <CppCoverageCross/FileCoverage.hpp>
 
 #include "../ExporterException.hpp"
 
-#include "Tools/Tool.hpp"
-
 #include "CoverageDataSerializer.hpp"
 #include "ProtoBuff.hpp"
+
+#ifdef _WIN32
+#include "Tools/Tool.hpp"
+#elif __linux__
+#include <ToolsCross/Tool.hpp>
+#include <fstream>
+#endif
 
 namespace pb = ProtoBuff;
 namespace cov = CppCoverage;
@@ -66,7 +71,7 @@ namespace Exporter
 			{
 				pb::ModuleCoverage moduleProtoBuff;
 
-				ReadMessage(input, moduleProtoBuff);				
+				ReadMessage(input, moduleProtoBuff);
 				auto& module = coverageData.AddModule(Tools::Utf8ToWString(moduleProtoBuff.path()));
 
 				for (const auto& fileProtoBuff : moduleProtoBuff.files())

@@ -22,7 +22,7 @@
 
 #include "CppCoverageTest/TestTools.hpp"
 
-#include "Tools/Tool.hpp"
+#include "ToolsCross/Tool.hpp"
 
 namespace cov = CppCoverage;
 

@@ -14,34 +14,16 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-#include "stdafx.h"
-#include "CppCoverageException.hpp"
+#pragma once
 
-#include <sstream>
+//#ifdef CPPCOVERAGE_EXPORTS
+	//#define CPPCOVERAGE_DLL __declspec(dllexport)
+//#else
+	//#define CPPCOVERAGE_DLL _declspec(dllimport)
+#define CPPCOVERAGE_DLL
+//#endif
 
-#include "Tools/Tool.hpp"
+#pragma warning (disable: 4251)
 
-namespace CppCoverage
-{	
-	//-------------------------------------------------------------------------
-	std::wstring GetErrorMessage(int lastErrorCode)
-	{			
-		std::vector<wchar_t> sysMsg(64 * 1024);
-		std::wostringstream ostr;
-			
-		if (FormatMessage(
-				FORMAT_MESSAGE_FROM_SYSTEM,
-				NULL, lastErrorCode,
-				MAKELANGID(LANG_NEUTRAL, SUBLANG_NEUTRAL),
-				&sysMsg[0], static_cast<int>(sysMsg.size()), NULL))
-		{
-			ostr << &sysMsg[0];
-		}
-		else
-		{
-			ostr << "Last error code:" << lastErrorCode;
-		}
 
-		return ostr.str();
-	}
-}
+

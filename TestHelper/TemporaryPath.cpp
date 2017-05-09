@@ -17,7 +17,7 @@
 #include "stdafx.h"
 #include "TemporaryPath.hpp"
 
-#include "Tools/Log.hpp"
+#include "ToolsCross/Log.hpp"
 #include "TestHelper/Tools.hpp"
 
 namespace fs = boost::filesystem;

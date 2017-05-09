@@ -27,7 +27,7 @@
 #include "FileFilter/ModuleInfo.hpp"
 #include "FileFilter/FileInfo.hpp"
 #include "FileFilter/LineInfo.hpp"
-#include "Tools/Tool.hpp"
+#include "ToolsCross/Tool.hpp"
 #include "TestTools.hpp"
 
 #include "TestCoverageConsole/TestCoverageConsole.hpp"

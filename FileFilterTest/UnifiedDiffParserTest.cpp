@@ -22,7 +22,7 @@
 
 #include <boost/filesystem.hpp>
 
-#include "Tools/Tool.hpp"
+#include "ToolsCross/Tool.hpp"
 
 using namespace FileFilter;
 namespace fs = boost::filesystem;
