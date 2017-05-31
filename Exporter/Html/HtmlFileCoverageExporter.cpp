@@ -113,6 +113,7 @@ namespace Exporter
 		auto filePath = fileCoverage.GetPath();
 
 		std::wifstream ifs{filePath.string()};
+		ifs.imbue(std::locale("en_US.UTF-8"));
 		if (!ifs)
 			THROW(L"Cannot open file : " + filePath.wstring());
 

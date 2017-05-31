@@ -14,15 +14,15 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-#include "stdafx.h"
+#include "FileFilterCross/stdafx.h"
 #include "ReleaseCoverageFilter.hpp"
 
 #include <ToolsCross/Log.hpp>
 
-#include "IRelocationsExtractor.hpp"
-#include "RelocationsExtractor.hpp"
-#include "ModuleInfo.hpp"
-#include "FileInfo.hpp"
+#include "FileFilter/IRelocationsExtractor.hpp"
+#include "FileFilter/RelocationsExtractor.hpp"
+#include "FileFilterCross/ModuleInfo.hpp"
+#include "FileFilterCross/FileInfo.hpp"
 #include "LineInfo.hpp"
 
 namespace FileFilter

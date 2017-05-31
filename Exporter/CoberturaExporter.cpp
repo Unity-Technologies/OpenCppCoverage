@@ -31,7 +31,7 @@
 #ifdef _WIN32
 #include "Tools/Tool.hpp"
 #elif __linux__
-#include <ToolsCross/Tool.hpp>
+#include <ToolsLinux/Tool.hpp>
 #endif
 
 namespace cov = CppCoverage;

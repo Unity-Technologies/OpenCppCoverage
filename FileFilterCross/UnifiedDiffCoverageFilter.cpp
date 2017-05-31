@@ -32,7 +32,7 @@ namespace FileFilter
 		//---------------------------------------------------------------------
 		std::vector<File> ParseUnifiedDiff(const boost::filesystem::path& unifiedDiffPath)
 		{
-			std::wifstream ifs(unifiedDiffPath.wstring());
+			std::wifstream ifs(unifiedDiffPath.string());
 
 			if (!ifs)
 				std::runtime_error("The file " + unifiedDiffPath.string() + " cannot be opened.");

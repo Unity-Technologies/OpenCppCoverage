@@ -23,6 +23,7 @@
 #include <boost/optional/optional_fwd.hpp>
 
 #include "ToolsExport.hpp"
+#include <ToolsCross/Log.hpp>
 
 namespace Tools
 {
