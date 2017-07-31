@@ -63,7 +63,7 @@ namespace Tools
 		}
 
 		//-----------------------------------------------------------------------------
-		void CreateMiniDump(
+		/*void CreateMiniDump(
 			MINIDUMP_EXCEPTION_INFORMATION& minidumpInfo, 
 			HANDLE hFile, 			
 			const wchar_t* dmpFilename)
@@ -111,7 +111,7 @@ namespace Tools
 			}
 			abort();
 			return 0;
-		}
+		}*/
 
 		//-------------------------------------------------------------------------
 		std::string ToString(unsigned int pageCode, const std::wstring& str)
@@ -202,13 +202,13 @@ namespace Tools
 	}
 
 	//-------------------------------------------------------------------------
-	void CreateMiniDumpOnUnHandledException()
+	/*void CreateMiniDumpOnUnHandledException()
 	{
 		DWORD dwMode = GetErrorMode();
 		SetErrorMode(dwMode | SEM_NOGPFAULTERRORBOX);
 
 		SetUnhandledExceptionFilter(CreateMiniDumpOnUnHandledException);
-	}
+	}*/
 
 	//-------------------------------------------------------------------------
 	void ShowOutputMessage(

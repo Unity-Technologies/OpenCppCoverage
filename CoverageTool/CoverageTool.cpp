@@ -69,6 +69,7 @@ GetMatchingFileName(std::ifstream& infile, std::regex srcFilter)
     std::string fileName = line.substr(3, line.length() - 1);
     while (!std::regex_match(fileName, srcFilter))
     {
+        std::cout << "skipped file: " << fileName << std::endl;
         skip_file(infile);
         if (!std::getline(infile, line))
         {
@@ -187,7 +188,7 @@ parseFileWithDiff(const std::string& path, std::string programName, const std::r
 void
 CreateCoverageOutput(CppCoverage::CoverageData data, std::string outputPath)
 {
-    Exporter::HtmlExporter exporter("../Exporter/Html/Template");
+    Exporter::HtmlExporter exporter("External\\OpenCppCoverage\\builds\\template");
     exporter.Export(data, outputPath);
 }
 
@@ -209,7 +210,7 @@ main(int /*argc*/, char *argv[])
     std::string inputFile, outputPath, diffPath;
     std::regex src_filter;
     try {
-        src_filter = std::regex(R"([\w:\/\\]+.(cpp|c|h|hpp))");
+        src_filter = std::regex(".+\\.(cpp|c|h|hpp)");
     }
     catch (const std::regex_error& e) {
         std::cout << "error" << e.what() << std::endl;
@@ -279,5 +280,6 @@ ParseToken(const std::string& token, char**& argv, std::string& inputFile, std::
         std::cout << "\t--input <path_to_lcov>" << std::endl;
         std::cout << "\t--output <path_to_output>" << std::endl;
         std::cout << "\t--diff <path_to_patch>" << std::endl;
+        std::cout << "\t--srcFilter <pattern>" << std::endl;
     }
 }
