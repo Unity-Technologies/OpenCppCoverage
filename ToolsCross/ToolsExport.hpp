@@ -16,14 +16,10 @@
 
 #pragma once
 
-//#ifdef EXPORTER_EXPORTS
-//#define EXPORTER_DLL __declspec(dllexport)
+//#ifdef TOOLS_EXPORTS
+#define TOOLS_DLL
 //#else
-//#define EXPORTER_DLL _declspec(dllimport)
+//#define TOOLS_DLL _declspec(dllimport)
 //#endif
-#define EXPORTER_DLL
 
 #pragma warning (disable: 4251)
-
-
-

@@ -19,13 +19,13 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{865B72E7-DA46-4392-A1B3-E5BD752C7041}</ProjectGuid>
+    <ProjectGuid>{01626948-FB00-4D7B-B3CB-12999C0783D0}</ProjectGuid>
     <RootNamespace>Exporter</RootNamespace>
     <WindowsTargetPlatformVersion>8.1</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
-    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <ConfigurationType>StaticLibrary</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <PlatformToolset>v140</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
@@ -44,7 +44,7 @@
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
-    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
     <PlatformToolset>v140</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
@@ -59,7 +59,6 @@
     <Import Project="..\PropertySheets\ProtoBuff.Debug.props" />
     <Import Project="..\PropertySheets\Boost.props" />
     <Import Project="..\PropertySheets\Default.props" />
-    <Import Project="..\PropertySheets\CTemplate.Release.x64.props" />
   </ImportGroup>
   <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="PropertySheets">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
@@ -67,7 +66,6 @@
     <Import Project="..\PropertySheets\Boost.64.props" />
     <Import Project="..\PropertySheets\ProtoBuff.Debug.X64.props" />
     <Import Project="..\PropertySheets\Default.props" />
-    <Import Project="..\PropertySheets\CTemplate.Release.x64.props" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
@@ -75,13 +73,13 @@
     <Import Project="..\PropertySheets\ProtoBuff.Release.props" />
     <Import Project="..\PropertySheets\Boost.props" />
     <Import Project="..\PropertySheets\CTemplate.Release.props" />
-    <Import Project="..\PropertySheets\CTemplate.Release.x64.props" />
   </ImportGroup>
   <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="PropertySheets">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
     <Import Project="..\PropertySheets\ProtoBuff.Release.x64.props" />
     <Import Project="..\PropertySheets\Default.props" />
     <Import Project="..\PropertySheets\Boost.64.props" />
+    <Import Project="..\PropertySheets\CTemplate.Release.x64.props" />
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup />
@@ -92,7 +90,8 @@
       <SDLCheck>true</SDLCheck>
       <PrecompiledHeader>Use</PrecompiledHeader>
       <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>EXPORTER_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <TreatWarningAsError>false</TreatWarningAsError>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
@@ -159,12 +158,9 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories);C:\Users\nicklas\Downloads\ctemplate-master\ctemplate-master\src\windows;C:\Users\nicklas\Downloads\ctemplate-master\ctemplate-master\src</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>CTEMPLATE_DLL_DECL=;EXPORTER_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <PrecompiledHeader>NotUsing</PrecompiledHeader>
-      <TreatWarningAsError>false</TreatWarningAsError>
-      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
-      <AdditionalOptions>/D CTEMPLATE_DLL_DECL= %(AdditionalOptions)</AdditionalOptions>
+      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>EXPORTER_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PrecompiledHeader>Use</PrecompiledHeader>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
@@ -227,10 +223,10 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\Downloads\ctemplate-2.3\ctemplate-2.3\vsprojects\libctemplate\libctemplate.vcxproj">
+    <ProjectReference Include="..\..\ctemplate-master-henrikp-special\ctemplate-master\ctemplate-master\vsprojects\libctemplate\libctemplate.vcxproj">
       <Project>{fb27fbdb-e6c0-4d00-a7f8-1eeef1b48abc}</Project>
     </ProjectReference>
-    <ProjectReference Include="..\..\Downloads\ctemplate-2.3\ctemplate-2.3\vsprojects\template_test_util_test\template_test_util_test.vcxproj">
+    <ProjectReference Include="..\..\ctemplate-master-henrikp-special\ctemplate-master\ctemplate-master\vsprojects\template_test_util_test\template_test_util_test.vcxproj">
       <Project>{87132061-d584-4388-a80b-d8560f8d0895}</Project>
     </ProjectReference>
     <ProjectReference Include="..\CppCoverage\CppCoverage.vcxproj">
@@ -246,6 +242,7 @@
       <SubType>Designer</SubType>
     </None>
     <None Include="Html\Template\SourceTemplate.html" />
+    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

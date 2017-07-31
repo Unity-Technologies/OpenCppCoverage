@@ -72,6 +72,7 @@
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
     <Import Project="..\PropertySheets\Default.props" />
     <Import Project="..\PropertySheets\Boost.64.props" />
+    <Import Project="..\PropertySheets\ProtoBuff.Release.x64.props" />
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
@@ -136,14 +137,19 @@
       <Optimization>MaxSpeed</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
-      <PreprocessorDefinitions>WIN32;OPEN_CPP_COVERAGE_EXPORTS;NDEBUG;_CONSOLE;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>CTEMPLATE_DLL_DECL=;WIN32;OPEN_CPP_COVERAGE_EXPORTS;NDEBUG;_CONSOLE;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
+      <TreatWarningAsError>false</TreatWarningAsError>
+      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+      <AdditionalOptions>/D CTEMPLATE_DLL_DECL= %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
+      <AdditionalDependencies>libprotobuf.lib;dbghelp.lib;libctemplate.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>C:\Users\nicklas\OpenCppCoverage\x64\Release;C:\Users\nicklas\Downloads\protobuf-master\protobuf-master\cmake\build\release\Release;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
@@ -166,6 +172,12 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\Downloads\ctemplate-2.3\ctemplate-2.3\vsprojects\libctemplate\libctemplate.vcxproj">
+      <Project>{fb27fbdb-e6c0-4d00-a7f8-1eeef1b48abc}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Downloads\ctemplate-2.3\ctemplate-2.3\vsprojects\template_test_util_test\template_test_util_test.vcxproj">
+      <Project>{87132061-d584-4388-a80b-d8560f8d0895}</Project>
+    </ProjectReference>
     <ProjectReference Include="..\CppCoverage\CppCoverage.vcxproj">
       <Project>{a50dd5a6-e85a-4e0b-9cc6-90d32503ce62}</Project>
     </ProjectReference>
