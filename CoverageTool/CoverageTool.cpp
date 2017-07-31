@@ -188,7 +188,11 @@ parseFileWithDiff(const std::string& path, std::string programName, const std::r
 void
 CreateCoverageOutput(CppCoverage::CoverageData data, std::string outputPath)
 {
+#ifdef __linux__
+    Exporter::HtmlExporter exporter("External/OpenCppCoverage/builds/template");
+#else
     Exporter::HtmlExporter exporter("External\\OpenCppCoverage\\builds\\template");
+#endif
     exporter.Export(data, outputPath);
 }
 
