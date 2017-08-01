@@ -176,6 +176,12 @@
     <ProjectReference Include="..\Exporter\Exporter.vcxproj">
       <Project>{01626948-fb00-4d7b-b3cb-12999c0783d0}</Project>
     </ProjectReference>
+    <ProjectReference Include="..\FileFilterCross\FileFilterCross.vcxproj">
+      <Project>{6fd7c5be-04bd-496d-a924-285a3e867814}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\FileFilter\FileFilter.vcxproj">
+      <Project>{cfad6bed-bc1d-418c-8264-18125af18ff2}</Project>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\Tools\stdafx.h" />

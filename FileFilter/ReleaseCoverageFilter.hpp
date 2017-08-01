@@ -16,6 +16,7 @@
 
 #pragma once
 
+#include "stdafx.h"
 #include "FileFilterCross/FileFilterExport.hpp"
 #include <unordered_set>
 #include <unordered_map>

@@ -17,8 +17,8 @@
 #include "stdafx.h"
 #include "LineFilter.hpp"
 
-#include "FileInfo.hpp"
 #include "LineInfo.hpp"
+#include <FileFilterCross/FileInfo.hpp>
 #include <ToolsCross/Log.hpp>
 #ifdef _WIN32
 #include <Tools/Tool.hpp>

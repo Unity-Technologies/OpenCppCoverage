@@ -21,7 +21,7 @@
 #include "CoverageFilterManager.hpp"
 #include "UnifiedDiffCoverageFilterManager.hpp"
 
-#include "FileFilter/FileInfo.hpp"
+#include "FileFilterCross/FileInfo.hpp"
 #include "FileFilter/LineInfo.hpp"
 #include "FileFilter/ReleaseCoverageFilter.hpp"
 

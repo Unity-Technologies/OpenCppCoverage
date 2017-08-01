@@ -33,8 +33,8 @@
 #include "ICoverageFilterManager.hpp"
 #include "Address.hpp"
 
-#include "FileFilter/ModuleInfo.hpp"
-#include "FileFilter/FileInfo.hpp"
+#include "FileFilterCross/ModuleInfo.hpp"
+#include "FileFilterCross/FileInfo.hpp"
 #include "FileFilter/LineInfo.hpp"
 
 namespace CppCoverage

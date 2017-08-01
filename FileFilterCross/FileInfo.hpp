@@ -20,7 +20,7 @@
 #include <vector>
 #include <boost/filesystem/path.hpp>
 
-#include "LineInfo.hpp"
+#include "FileFilter/LineInfo.hpp"
 
 namespace FileFilter
 {

@@ -16,7 +16,7 @@
 
 #pragma once
 
-#include "FileFilterExport.hpp"
+#include "FileFilterCross/FileFilterExport.hpp"
 #include <boost/filesystem/path.hpp>
 #include <vector>
 #include <string>

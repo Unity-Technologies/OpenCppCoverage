@@ -226,9 +226,6 @@
     <ProjectReference Include="..\CppCoverageCross\CppCoverageCross.vcxproj">
       <Project>{5463ba83-2738-481b-abd4-6ce6e8ce2149}</Project>
     </ProjectReference>
-    <ProjectReference Include="..\FileFilter\FileFilter.vcxproj">
-      <Project>{6fd7c5be-04bd-496d-a924-285a3e867814}</Project>
-    </ProjectReference>
     <ProjectReference Include="..\ToolsCross\ToolsCross.vcxproj">
       <Project>{f0e455a9-133a-4a26-b594-2422f447a5ac}</Project>
     </ProjectReference>

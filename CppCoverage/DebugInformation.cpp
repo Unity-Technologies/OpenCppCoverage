@@ -33,7 +33,7 @@
 #include "Tools/DbgHelp.hpp"
 #include "ICoverageFilterManager.hpp"
 
-#include "FileFilter/ModuleInfo.hpp"
+#include "FileFilterCross/ModuleInfo.hpp"
 
 namespace CppCoverage
 {
