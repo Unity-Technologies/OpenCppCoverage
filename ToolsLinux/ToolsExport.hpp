@@ -16,11 +16,6 @@
 
 #pragma once
 
-//#ifdef FILEFILTER_EXPORTS
-//#define FILEFILTER_DLL __declspec(dllexport)
-//#else
-//#define FILEFILTER_DLL _declspec(dllimport)
-//#endif
-#define FILEFILTER_DLL
+#define TOOLS_DLL
 
 #pragma warning (disable: 4251)

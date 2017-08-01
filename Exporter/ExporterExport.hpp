@@ -20,8 +20,8 @@
 //#define EXPORTER_DLL __declspec(dllexport)
 //#else
 //#define EXPORTER_DLL _declspec(dllimport)
-//#endif
 #define EXPORTER_DLL
+//#endif
 
 #pragma warning (disable: 4251)
 

@@ -39,8 +39,10 @@ namespace FileFilter
 
 		bool operator==(const File&) const;
 
+		File operator* (const File &file) { return *this; }
+
 	private:
-		File(const File&) = delete;
+		File(const File&) = default;
 		File& operator=(const File&) = delete;
 
 		boost::filesystem::path path_;

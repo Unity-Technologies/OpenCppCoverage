@@ -20,9 +20,9 @@
 #include <iostream>
 #include <codecvt>
 
-#include "Log.hpp"
-#include "ToolsException.hpp"
-#include "ScopedAction.hpp"
+#include <ToolsCross/Log.hpp>
+#include <ToolsCross/ToolsException.hpp>
+#include <ToolsCross/ScopedAction.hpp>
 
 #if defined(_MSC_VER)
 #include <BaseTsd.h>
@@ -70,7 +70,7 @@ namespace Tools
             const wchar_t* pt;
             char buffer [MB_CUR_MAX];
             int i, length;
-            std::vector<char> resString(str.size());
+            std::vector<char> resString;
 
             pt = str.c_str();
             while (*pt)
@@ -83,6 +83,7 @@ namespace Tools
                 {
                     resString.push_back(buffer[i]);
                 }
+                ++pt;
             }
 
             return {resString.begin(), resString.end()};
@@ -164,12 +165,8 @@ namespace Tools
 		return boost::none;
 	}
 
-
-
 	//-------------------------------------------------------------------------
-	void ShowOutputMessage(
-		const std::wstring& message, 
-		const boost::filesystem::path& path)
+	void ShowOutputMessage(const std::wstring& message, const boost::filesystem::path& path)
 	{
 		LOG_INFO << GetSeparatorLine();
 		LOG_INFO << message << path.wstring();

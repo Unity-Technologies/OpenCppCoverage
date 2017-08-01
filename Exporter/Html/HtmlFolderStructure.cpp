@@ -23,7 +23,7 @@
 #ifdef _WIN_32
 #include "Tools/Tool.hpp"
 #elif __linux__
-#include <ToolsCross/Tool.hpp>
+#include <ToolsLinux/Tool.hpp>
 #endif
 #include <ToolsCross/UniquePath.hpp>
 

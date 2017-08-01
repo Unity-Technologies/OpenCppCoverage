@@ -13,7 +13,9 @@ message(STATUS "making CoverageTool...")
 link_libraries(
         Exporter
         CppCoverageCross
+        FileFilterCross
         ToolsCross
+        ToolsLinux
         ctemplate
         pthread)
 link_directories(

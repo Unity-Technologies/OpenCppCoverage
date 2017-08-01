@@ -1,5 +1,5 @@
 // OpenCppCoverage is an open source code coverage for C++.
-// Copyright (C) 2016 OpenCppCoverage
+// Copyright (C) 2014 OpenCppCoverage
 //
 // This program is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -16,19 +16,11 @@
 
 #pragma once
 
-#include <windows.h>
-#include <unordered_set>
-#include "FileFilterCross/FileFilterExport.hpp"
+//#ifdef FILEFILTER_EXPORTS
+//#define FILEFILTER_DLL __declspec(dllexport)
+//#else
+//#define FILEFILTER_DLL _declspec(dllimport)
+#define FILEFILTER_DLL
+//#endif
 
-namespace FileFilter
-{
-	class FILEFILTER_DLL IRelocationsExtractor
-	{
-	public:
-		~IRelocationsExtractor() {}
-		virtual std::unordered_set<DWORD64> Extract(
-			HANDLE hProcess,
-			DWORD64 baseOfImage,
-			DWORD64 baseAddress) const = 0;
-	};
-}
+#pragma warning (disable: 4251)

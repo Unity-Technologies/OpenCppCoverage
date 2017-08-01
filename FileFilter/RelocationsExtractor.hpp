@@ -18,7 +18,7 @@
 
 #include <windows.h>
 #include <unordered_set>
-#include "FileFilterExport.hpp"
+#include "FileFilterCross/FileFilterExport.hpp"
 #include "IRelocationsExtractor.hpp"
 
 namespace FileFilter
